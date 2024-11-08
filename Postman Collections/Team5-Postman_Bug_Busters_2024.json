@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "8b5ec035-83d9-42d8-99f9-17530fac7ca4",
+		"name": "Team5_Postman_Bug_Busters_LMS_Hackathon_Nov2024",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a12555e1-05af-4ffd-93db-225394ed9a59",
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"AuthToken\",jsonData.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "3712480e-6a40-449d-a74e-8b7abe4ccf83",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userLoginEmailId\": \"sdet@gmail.com\",\r\n  \"password\": \"LmsHackathon@2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}login"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"id": "129b7a92-3e3e-4f7f-91fe-830d1661d695",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}batches"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{AuthToken}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e9e842cc-6a32-40d3-abab-c17476136191",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "059f0f9b-08e7-4205-82ff-1dd80186427a",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"//-Viji\r",
+					"\r",
+					"///my second"
+				]
+			}
+		}
+	]
+}
