@@ -885,7 +885,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "acff20ad-cfd2-4c79-a591-63f1af2e0c8e",
+				"id": "3e9f2444-1ae1-4615-9060-963b142ed523",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -920,33 +920,33 @@
 					"//     postman.setNextRequest(pm.info.requestName)",
 					"// }",
 					"",
-					"//------------------ Authorization Set Up-----------------",
-					"pm.request.headers.clear(); // Clear all headers to prevent residual values",
-					"var AuthType = pm.variables.get(\"authType\");",
-					"switch (AuthType) {",
-					"    case \"No Auth\":",
-					"        pm.request.auth = { type: 'noauth' };",
-					"        break;",
-					"    case \"Bearer Token\":",
-					"        const authToken = pm.environment.get(\"AuthToken\");",
-					"        if (authToken) {",
-					"            pm.request.headers.add({ key: \"Authorization\", value: `Bearer ${authToken}` });}",
-					"         else {console.log(\"AuthToken is not set in the environment.\");}",
-					"        break;",
-					"    case \"Invalid Bearer token\":",
-					"        pm.request.headers.add({ key: \"Authorization\", value: \"invalid\" });",
-					"         console.log(\"Using invalid bearer token.\");",
-					"        break;",
-					"    default:",
-					"        console.log(\"Unknown authType: \" + AuthType); break;",
-					"}"
+					"// //------------------ Authorization Set Up-----------------",
+					"// pm.request.headers.clear(); // Clear all headers to prevent residual values",
+					"// var AuthType = pm.variables.get(\"authType\");",
+					"// switch (AuthType) {",
+					"//     case \"No Auth\":",
+					"//         pm.request.auth = { type: 'noauth' };",
+					"//         break;",
+					"//     case \"Bearer Token\":",
+					"//         const authToken = pm.environment.get(\"AuthToken\");",
+					"//         if (authToken) {",
+					"//             pm.request.headers.add({ key: \"Authorization\", value: `Bearer ${authToken}` });}",
+					"//          else {console.log(\"AuthToken is not set in the environment.\");}",
+					"//         break;",
+					"//     case \"Invalid Bearer token\":",
+					"//         pm.request.headers.add({ key: \"Authorization\", value: \"invalid\" });",
+					"//          console.log(\"Using invalid bearer token.\");",
+					"//         break;",
+					"//     default:",
+					"//         console.log(\"Unknown authType: \" + AuthType); break;",
+					"// }"
 				]
 			}
 		},
 		{
 			"listen": "test",
 			"script": {
-				"id": "65e14d70-21a5-4639-a3db-931a8eb5c7be",
+				"id": "8c562a6f-8b46-4d53-9385-239cc7a000eb",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
