@@ -7,21 +7,956 @@
 	"item": [
 		{
 			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6de74170-eb9e-4c6a-8cfe-94d26e476ff6",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"//console.log(\"jsonData \" +jsonData);",
+									"pm.environment.set(\"AuthToken\",jsonData.token);",
+									"",
+									"pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "a6a2f7f4-b6ed-4ca3-955a-a72f5fd719f2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userLoginEmailId\": \"{{user_LoginEmail}}\",\n  \"password\": \"{{user_password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"id": "fc1ab151-c597-40a3-b70e-c8575e8b2e73"
+		},
+		{
+			"name": "Program Module",
+			"item": [
+				{
+					"name": "Add New Program with Invalid Method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1a5fd139-b9ac-4ee4-94f5-ea0b4eb51eb7",
+								"exec": [
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"const jsonData = pm.response.json();",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "5377e740-92ed-4fb4-8d1b-a71b0124be08",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"programName\": \"{{programName}}\",\n  \"programDescription\": \"{{programDescription}}\",\n  \"programStatus\": \"{{programStatus}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Program with Invalid Content Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1a5fd139-b9ac-4ee4-94f5-ea0b4eb51eb7",
+								"exec": [
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"const jsonData = pm.response.json();",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "e066eb13-8d1b-472b-be93-64c2c0520ce1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"programName\": \"kafkaseven\",\n  \"programDescription\": \"kafka program\",\n  \"programStatus\": \"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "html"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Program with Mandatory fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1a5fd139-b9ac-4ee4-94f5-ea0b4eb51eb7",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"",
+									"const expectedSchema = {",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"programId\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"programName\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"programDescription\": {",
+									"      \"type\": \"null\"",
+									"    },",
+									"    \"programStatus\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"creationTime\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"lastModTime\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"programId\",",
+									"    \"programName\",",
+									"    \"programDescription\",",
+									"    \"programStatus\",",
+									"    \"creationTime\",",
+									"    \"lastModTime\"",
+									"  ]",
+									"}",
+									"//calling common methods",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"",
+									"",
+									"// Get the status code of the response",
+									"var StatusCode = pm.response.code;",
+									"",
+									"if(StatusCode === 201){",
+									"",
+									"    //calling jsonSchemaValidation methods",
+									"    eval(pm.environment.get(\"jsonSchemaValidation\"))();",
+									"",
+									"    pm.test(\"Validating Test Data Type Of the Response\", () => {",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData.programId).to.be.a(\"number\");",
+									"    pm.expect(jsonData.programName).to.be.a(\"string\");",
+									"    pm.expect(jsonData.programStatus).to.be.a(\"string\");",
+									"    });",
+									"",
+									"    pm.test(\"Validating ProgramName\", () => {",
+									"        pm.expect(jsonData.programName).to.equal(pm.collectionVariables.get(\"programName2\"));",
+									"    });",
+									"    pm.test(\"Validating Program Status\", () => {",
+									"        pm.expect(jsonData.programStatus).to.equal(pm.variables.get(\"programStatus\"));",
+									"    });",
+									"",
+									"pm.collectionVariables.set(\"programId2\",jsonData.programId);",
+									"pm.collectionVariables.set(\"programName2\",jsonData.programName);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c5b6d587-8c23-4093-9512-a71b90f5cccc",
+								"exec": [
+									"var statusCode = pm.variables.get(\"statusCode\");",
+									"console.log(\"statusCode \"+statusCode);",
+									"if(statusCode === 201){",
+									"var programName2 = \"PostmanBugBusters\"+ \"-\" + pm.variables.replaceIn('{{$randomFirstName}}');",
+									"pm.collectionVariables.set(\"programName2\", programName2);",
+									"}else{",
+									" pm.collectionVariables.set(\"programName2\", pm.variables.get(\"programName\"));",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "98120312-f7c5-4ae0-bb0b-4925ec865c08",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"programName\": \"{{programName2}}\",\n  \"programStatus\": \"{{programStatus}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Program with all fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1a5fd139-b9ac-4ee4-94f5-ea0b4eb51eb7",
+								"exec": [
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"var jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"",
+									"const expectedSchema = {",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"programId\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"programName\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"programDescription\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"programStatus\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"creationTime\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"lastModTime\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"programId\",",
+									"    \"programName\",",
+									"    \"programDescription\",",
+									"    \"programStatus\",",
+									"    \"creationTime\",",
+									"    \"lastModTime\"",
+									"  ]",
+									"}",
+									"",
+									"//calling common methods",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"",
+									"",
+									"// Get the status code of the response",
+									"var StatusCode = pm.response.code;",
+									"// pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"if(StatusCode === 201){",
+									"",
+									"    //calling jsonSchemaValidation methods",
+									"    eval(pm.environment.get(\"jsonSchemaValidation\"))();",
+									"",
+									"    pm.test(\"Validating Test Data Type Of the Response\", () => {",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData.programId).to.be.a(\"number\");",
+									"    pm.expect(jsonData.programName).to.be.a(\"string\");",
+									"    pm.expect(jsonData.programDescription).to.be.a(\"string\");",
+									"    pm.expect(jsonData.programStatus).to.be.a(\"string\");",
+									"    });",
+									"",
+									"    pm.test(\"Validating ProgramName\", () => {",
+									"        pm.expect(jsonData.programName).to.equal(pm.collectionVariables.get(\"programName1\"));",
+									"    });",
+									"    pm.test(\"Validating Program Status\", () => {",
+									"        pm.expect(jsonData.programStatus).to.equal(pm.variables.get(\"programStatus\"));",
+									"    });",
+									"",
+									"pm.collectionVariables.set(\"programId1\",jsonData.programId);",
+									"pm.collectionVariables.set(\"programName1\",jsonData.programName);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9883b5a5-117a-4761-9cff-4a6092dc4fd8",
+								"exec": [
+									"var statusCode = pm.variables.get(\"statusCode\");",
+									"console.log(\"statusCode \"+statusCode);",
+									"if(statusCode === 201){",
+									"var programName1 = \"PostmanBugBusters\"+ \"-\" + pm.variables.replaceIn('{{$randomFirstName}}');",
+									"pm.collectionVariables.set(\"programName1\", programName1);",
+									"}else{",
+									" pm.collectionVariables.set(\"programName1\", pm.variables.get(\"programName\"));   ",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "21e213e8-a76d-42ad-9aff-5f6799537c45",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"programName\": \"{{programName1}}\",\n  \"programDescription\": \"{{programDescription}}\",\n  \"programStatus\": \"{{programStatus}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "get all programs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e972e993-45a7-4af6-97cf-6f6a4d18bc3f",
+								"exec": [
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"const jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"",
+									"//calling common methods",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "0f5ca63a-40a0-4b69-85fa-ce8abf729f90",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Programs with Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64a1d76d-2a59-4ef3-957a-13441d3547ce",
+								"exec": [
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"const jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"",
+									"//calling common methods",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "832daf17-9dfa-4c53-9eea-a15141204a6a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Program by ProgramId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "039e0266-6c3c-4517-a505-945c27ea36dd",
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"",
+									"//calling common methods",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "e2d1dddb-c828-44b6-81e3-3aa8c8d51154",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Program by ProgramName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00f9d2db-3699-4aa1-9667-02d42c35872c",
+								"exec": [
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"var jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"",
+									"",
+									"//calling common methods",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"",
+									"// Get the status code of the response",
+									"var StatusCode = pm.response.code;",
+									"",
+									" if(StatusCode === 201){",
+									"",
+									"const expectedSchema = {",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"programId\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"programName\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"programDescription\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"programStatus\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"creationTime\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"lastModTime\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"programId\",",
+									"    \"programName\",",
+									"    \"programDescription\",",
+									"    \"programStatus\",",
+									"    \"creationTime\",",
+									"    \"lastModTime\"",
+									"  ]",
+									"}",
+									"   eval(pm.environment.get(\"jsonSchemaValidation\"))();",
+									"",
+									"    pm.test(\"Validating Test Data Type Of the Response\", () => {",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData.programId).to.be.a(\"number\");",
+									"    pm.expect(jsonData.programName).to.be.a(\"string\");",
+									"    pm.expect(jsonData.programDescription).to.be.a(\"string\");",
+									"    pm.expect(jsonData.programStatus).to.be.a(\"string\");",
+									"    });",
+									"",
+									"    pm.test(\"Validating Program ID\", () => {",
+									"        pm.expect(jsonData.programId).to.equal(pm.collectionVariables.get(\"programId1\"));",
+									"    });",
+									"    pm.test(\"Validating ProgramName\", () => {",
+									"        pm.expect(jsonData.programName).to.equal(pm.collectionVariables.get(\"programName1\"));",
+									"    });",
+									"    pm.test(\"Validating Program Status\", () => {",
+									"        pm.expect(jsonData.programStatus).to.equal(pm.variables.get(\"programStatus\"));",
+									"    });",
+									"",
+									"// //pm.collectionVariables.set(\"programId\",jsonData.programId);",
+									"// pm.collectionVariables.set(\"programName1\",jsonData.programName);",
+									" }",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "aeec94f5-b9e5-4cb9-be55-51b90fc3c5d3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"programName\": \"{{programName1}}\",\n  \"programDescription\": \"{{programDescription}}\",\n  \"programStatus\": \"{{programStatus}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Program by ProgramId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9430f6eb-9183-4933-8c31-2d7ff04b459a",
+								"exec": [
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"var jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"",
+									"",
+									"//calling common methods",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"}",
+									"//Get the status code of the response",
+									"var StatusCode = pm.response.code;",
+									"",
+									"if(StatusCode === 201){",
+									"const expectedSchema = {",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"programId\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"programName\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"programDescription\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"programStatus\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"creationTime\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"lastModTime\": {",
+									"      \"type\": \"string\"",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"programId\",",
+									"    \"programName\",",
+									"    \"programDescription\",",
+									"    \"programStatus\",",
+									"    \"creationTime\",",
+									"    \"lastModTime\"",
+									"  ]",
+									"}",
+									"   eval(pm.environment.get(\"jsonSchemaValidation\"))();",
+									"",
+									"    pm.test(\"Validating Test Data Type Of the Response\", () => {",
+									"    pm.expect(jsonData).to.be.an(\"object\");",
+									"    pm.expect(jsonData.programId).to.be.a(\"number\");",
+									"    pm.expect(jsonData.programName).to.be.a(\"string\");",
+									"    pm.expect(jsonData.programDescription).to.be.a(\"string\");",
+									"    pm.expect(jsonData.programStatus).to.be.a(\"string\");",
+									"    });",
+									"",
+									"    pm.test(\"Validating Program ID\", () => {",
+									"        pm.expect(jsonData.programId).to.equal(pm.collectionVariables.get(\"programId1\"));",
+									"    });",
+									"    pm.test(\"Validating ProgramName\", () => {",
+									"        pm.expect(jsonData.programName).to.equal(pm.collectionVariables.get(\"programName1\"));",
+									"    });",
+									"    pm.test(\"Validating Program Status\", () => {",
+									"        pm.expect(jsonData.programStatus).to.equal(pm.variables.get(\"programStatus\"));",
+									"    });",
+									"",
+									"// //pm.collectionVariables.set(\"programId\",jsonData.programId);",
+									"// pm.collectionVariables.set(\"programName\",jsonData.programName);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "a8775e4c-6aae-4b48-99da-bf1d0d5d7b29",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"programName\": \"{{programName1}}\",\n  \"programDescription\": \"{{programDescription}}\",\n  \"programStatus\": \"{{programStatus}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Program By ProgramID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"// pm.environment.unset(\"programId\");",
+									"// pm.environment.unset(\"programName\");",
+									"// Get the status code of the response",
+									"var StatusCode = pm.response.code;",
+									"",
+									"//calling common methods",
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"if(StatusCode === 200){",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"var jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"}",
+									"}",
+									"// pm.collectionVariables.set(\"programId1\",null);",
+									"// pm.collectionVariables.set(\"programName1\",null);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "5f8b8c64-dd75-4882-8148-a34427f432b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Program By ProgramName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"// pm.environment.unset(\"programId2\");",
+									"// pm.environment.unset(\"programName2\");",
+									"",
+									"// const jsonData = pm.response.json();",
+									"// console.log(jsonData);",
+									"",
+									"// Get the status code of the response",
+									"var StatusCode = pm.response.code;",
+									"",
+									"",
+									"//calling common methods",
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"if(StatusCode === 200){",
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});",
+									"}else{",
+									"var jsonData = pm.response.json();",
+									"console.log(jsonData);",
+									"eval(pm.environment.get(\"commonTests\"))();",
+									"}",
+									"}",
+									"// pm.collectionVariables.set(\"programId2\",null);",
+									"// pm.collectionVariables.set(\"programName2\",null);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "dbd7099e-eb29-4bfe-b908-eca017c41de6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"id": "68f2a055-3fcc-45f5-b32e-99f6df7eed03"
+		},
+		{
+			"name": "Logout",
+			"item": [
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"    pm.test(\"Validating Status Code\", ()=> {",
+									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "23a1c8e6-5d3a-4bff-9c99-c8ab5f976ff7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"id": "72f1d12d-ed44-4070-8772-f10d098c3a6c"
+		},
+		{
+			"name": "Update Program by ProgramId copy",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "a12555e1-05af-4ffd-93db-225394ed9a59",
+						"id": "9a4d0078-893f-49d7-8afb-04f19aaaa262",
 						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"pm.environment.set(\"AuthToken\",jsonData.token);"
+							"var programName1 = \"PostmanBugBusters\"+ \"-\" + pm.variables.replaceIn('{{$randomFirstName}}');",
+							"//const randomUUID = pm.variables.replaceIn('{{$randomUUID}}');",
+							"console.log(\"programName1 \"+programName1);",
+							"//console.log(\"randomUUID \"+randomUUID);",
+							"",
+							"    const letters = \"abcdefghijklmnopqrstuvwxyz\";",
+							"    let word = \"\";",
+							"    for (let i = 0; i < 6; i++) {",
+							"        word += letters.charAt(Math.floor(Math.random() * letters.length));",
+							"    }",
+							" ",
+							"",
+							"// Generate a random word of 5-10 characters",
+							"//const randomWord = generateRandomWord(5 + Math.floor(Math.random() * 6));",
+							"",
+							"// Set the word as an environment variable to use in the request",
+							"//pm.variables.set(\"randomWord\", randomWord);",
+							"console.log(\"word \"+word);"
 						],
 						"type": "text/javascript",
 						"packages": {}
 					}
 				}
 			],
-			"id": "3712480e-6a40-449d-a74e-8b7abe4ccf83",
+			"id": "52d51d61-969e-475c-b4b1-b129d4c7ebf3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"programName\": \"teamqweqw\",\n  \"programDescription\": \"111\",\n  \"programStatus\": \"active\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}putprogram/17149"
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Program with Invalid Content Type copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1a5fd139-b9ac-4ee4-94f5-ea0b4eb51eb7",
+						"exec": [
+							"if (pm.response.text() === '') {",
+							"    console.log(\"Empty response received.\");",
+							"    pm.test(\"Validating Status Code\", ()=> {",
+							"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+							"});",
+							"}else{",
+							"const jsonData = pm.response.json();",
+							"eval(pm.environment.get(\"commonTests\"))();",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "fa6b1db8-77ae-4242-92c2-499220644cd5",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -30,14 +965,76 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"userLoginEmailId\": \"sdet@gmail.com\",\r\n  \"password\": \"LmsHackathon@2024\"\r\n}",
+					"raw": "{\n  \"programName\": \"kafkaseven\",\n  \"programDescription\": \"kafka program\",\n  \"programStatus\": \"active\"\n}",
+					"options": {
+						"raw": {
+							"language": "html"
+						}
+					}
+				},
+				"url": "https://lms-hackthon-oct24-3efc7e0df381.herokuapp.com/lms/saveprogram"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Program by Program name Copy 2",
+			"id": "271bdbe5-8ce7-478e-af67-79bb88484552",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"programName\": \"kafkaseven\",\n  \"programDescription\": \"kaf program\",\n  \"programStatus\": \"active\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "{{baseUrl}}login"
+				"url": "{{baseUrl}}program/zwx"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+						"exec": [
+							"    pm.test(\"Validating Status Code\", ()=> {",
+							"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "d58b4b25-0a09-4459-ac8c-5850dc5974d5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}logoutlms"
 			},
 			"response": []
 		},
@@ -80,9 +1077,74 @@
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
+					"\r",
+					"var commonTests = () =>{\r",
+					"pm.test(\"Validating Status Code\", ()=> {\r",
+					"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Response status text check\", function () {\r",
+					"    pm.expect(pm.response.status).to.eql(pm.variables.get('statusText'));\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Content-Type header is application/json\", ()=>{\r",
+					"    pm.response.to.have.header(\"Content-Type\");\r",
+					"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Response time is less than 1000ms\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+					"});\r",
+					"\r",
+					"pm.test('Validating Response is not NULL', function () {\r",
+					"    pm.expect(jsonData).to.not.equal(null);})\r",
+					"\r",
+					"}\r",
+					"\r",
+					"pm.environment.set(\"commonTests\",commonTests.toString());\r",
+					"\r",
+					"var jsonSchemaValidation = () =>{\r",
+					"    pm.test(\"Verify JSON Schema using AJV\", function () {\r",
+					"        pm.response.to.have.jsonSchema(expectedSchema);\r",
+					"    });\r",
+					"}\r",
+					"\r",
+					"pm.environment.set(\"jsonSchemaValidation\",jsonSchemaValidation.toString());\r",
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"id": "0cb1dfe3-3b8b-4ae1-850f-c3f409a52725",
+			"key": "programId1",
+			"value": ""
+		},
+		{
+			"id": "3c3ecdae-15a9-4b27-8565-3770f52df057",
+			"key": "programName1",
+			"value": ""
+		},
+		{
+			"id": "664946c1-ea33-48d3-8b99-6ae512581320",
+			"key": "programId2",
+			"value": ""
+		},
+		{
+			"id": "b9bd35fd-365f-476c-9481-ba8c59b2620e",
+			"key": "programName2",
+			"value": ""
+		},
+		{
+			"id": "f35f2820-77be-4a6e-b6a7-d213744af2a0",
+			"key": "invalidProgramId",
+			"value": "1234567"
+		},
+		{
+			"id": "e558281a-0a03-451b-87da-14943a3b8418",
+			"key": "invalidProgramName",
+			"value": "zwq"
 		}
 	]
 }
