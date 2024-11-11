@@ -891,18 +891,68 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "48ee947e-4e9f-49d1-8dba-0df621f695cb",
+				"id": "b52c31f3-191f-442a-8753-9172af6989c3",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
-					""
+					"if (typeof pm.variables.get('requestdata') !== 'object') {",
+					"    pm.variables.set('requestdata', pm.iterationData.toObject());",
+					"}",
+					"const requestdata = pm.variables.get('requestdata');",
+					"",
+					"if(typeof requestdata !== 'object' || Object.keys(requestdata).length ===0) {",
+					"    console.log(\"No external file found\")",
+					"    return;",
+					"}",
+					"",
+					"const currentrequest = requestdata.requests.filter(({name}) => name === pm.info.requestName) [0];",
+					"if(!currentrequest){",
+					"    console.log(`Request ${pm.info.requestName} has no data defined.`);",
+					"}",
+					"",
+					"const variables = currentrequest.data.shift();",
+					"",
+					"Object.entries(variables).forEach(([key, value]) => {",
+					"        pm.variables.set(key, value);",
+					"    });",
+					"",
+					"pm.variables.set('requestdata',requestdata);",
+					"if(currentrequest.data.length > 0){",
+					"    pm.execution.setNextRequest(pm.info.requestName)",
+					"}",
+					" ",
+					"//  pm.variables.set('requestdata',requestdata);",
+					"// if(currentrequest.data.length > 0){",
+					"//     postman.setNextRequest(pm.info.requestName)",
+					"// }",
+					"",
+					"//------------------ Authorization Set Up-----------------",
+					"pm.request.headers.clear(); // Clear all headers to prevent residual values",
+					"var AuthType = pm.variables.get(\"authType\");",
+					"switch (AuthType) {",
+					"    case \"No Auth\":",
+					"        pm.request.auth = { type: 'noauth' };",
+					"        break;",
+					"    case \"Bearer Token\":",
+					"        const authToken = pm.environment.get(\"AuthToken\");",
+					"        if (authToken) {",
+					"            pm.request.headers.add({ key: \"Authorization\", value: `Bearer ${authToken}` });}",
+					"         else {console.log(\"AuthToken is not set in the environment.\");}",
+					"        break;",
+					"    case \"Invalid Bearer token\":",
+					"        pm.request.headers.add({ key: \"Authorization\", value: \"invalid\" });",
+					"         console.log(\"Using invalid bearer token.\");",
+					"        break;",
+					"    default:",
+					"        console.log(\"Unknown authType: \" + AuthType); break;",
+					"}"
 				]
 			}
 		},
 		{
 			"listen": "test",
 			"script": {
-				"id": "c05861ab-0c1d-403e-aaa4-34b2fdf014c5",
+				"id": "dce4e1e9-75e7-481e-b98c-583c041366f1",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -946,32 +996,26 @@
 	],
 	"variable": [
 		{
-			"id": "0cb1dfe3-3b8b-4ae1-850f-c3f409a52725",
 			"key": "programId1",
 			"value": ""
 		},
 		{
-			"id": "3c3ecdae-15a9-4b27-8565-3770f52df057",
 			"key": "programName1",
 			"value": ""
 		},
 		{
-			"id": "664946c1-ea33-48d3-8b99-6ae512581320",
 			"key": "programId2",
 			"value": ""
 		},
 		{
-			"id": "b9bd35fd-365f-476c-9481-ba8c59b2620e",
 			"key": "programName2",
 			"value": ""
 		},
 		{
-			"id": "f35f2820-77be-4a6e-b6a7-d213744af2a0",
 			"key": "invalidProgramId",
 			"value": "1234567"
 		},
 		{
-			"id": "e558281a-0a03-451b-87da-14943a3b8418",
 			"key": "invalidProgramName",
 			"value": "zwq"
 		}
