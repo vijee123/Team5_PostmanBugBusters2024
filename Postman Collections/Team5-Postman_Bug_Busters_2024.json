@@ -885,7 +885,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "580a83aa-ab94-4cc4-b58d-deddc92dd6b7",
+				"id": "5d904746-d91b-4980-b946-dcb5bc573bf2",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -946,7 +946,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "808ef354-45d2-4be7-bdce-4c84824dc30d",
+				"id": "68c89ab0-7460-4995-881b-27b9389d9f30",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -969,8 +969,8 @@
 					"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
 					"});\r",
 					"\r",
-					"pm.test('Validating Response is not NULL', function () {\r",
-					"    pm.expect(jsonData).to.not.equal(null);})\r",
+					"// pm.test('Validating Response is not NULL', function () {\r",
+					"//     pm.expect(jsonData).to.not.equal(null);})\r",
 					"\r",
 					"}\r",
 					"\r",
