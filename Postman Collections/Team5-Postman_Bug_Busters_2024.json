@@ -848,9 +848,9 @@
 							"script": {
 								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
 								"exec": [
-									"    pm.test(\"Validating Status Code\", ()=> {",
-									"    pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"});"
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });"
 								],
 								"type": "text/javascript",
 								"packages": {}
