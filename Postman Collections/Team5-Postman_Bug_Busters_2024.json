@@ -65,7 +65,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "e9e842cc-6a32-40d3-abab-c17476136191",
+				"id": "48ee947e-4e9f-49d1-8dba-0df621f695cb",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -76,13 +76,11 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "059f0f9b-08e7-4205-82ff-1dd80186427a",
+				"id": "c05861ab-0c1d-403e-aaa4-34b2fdf014c5",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
-					"//-Viji\r",
-					"\r",
-					"///my second"
+					""
 				]
 			}
 		}
