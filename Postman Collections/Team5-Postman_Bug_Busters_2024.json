@@ -881,17 +881,11 @@
 			"id": "72f1d12d-ed44-4070-8772-f10d098c3a6c"
 		}
 	],
-	"auth": {
-		"type": "bearer",
-		"bearer": {
-			"token": "{{AuthToken}}"
-		}
-	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "b52c31f3-191f-442a-8753-9172af6989c3",
+				"id": "580a83aa-ab94-4cc4-b58d-deddc92dd6b7",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -952,7 +946,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "dce4e1e9-75e7-481e-b98c-583c041366f1",
+				"id": "808ef354-45d2-4be7-bdce-4c84824dc30d",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
