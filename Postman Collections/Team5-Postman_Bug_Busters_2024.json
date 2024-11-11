@@ -718,7 +718,129 @@
 		},
 		{
 			"name": "Delete and Data Cleanup",
-			"item": [],
+			"item": [
+				{
+					"name": "Delete Program By ProgramName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"// pm.environment.unset(\"programId2\");",
+									"// pm.environment.unset(\"programName2\");",
+									"",
+									"// const jsonData = pm.response.json();",
+									"// console.log(jsonData);",
+									"",
+									"// Get the status code of the response",
+									"// var StatusCode = pm.response.code;",
+									"",
+									"",
+									"// //calling common methods",
+									"// if (pm.response.text() === '') {",
+									"//     console.log(\"Empty response received.\");",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// if(StatusCode === 200){",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// var jsonData = pm.response.json();",
+									"// console.log(jsonData);",
+									"// eval(pm.environment.get(\"commonTests\"))();",
+									"// }",
+									"// }",
+									"// pm.collectionVariables.set(\"programId2\",null);",
+									"// pm.collectionVariables.set(\"programName2\",null);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "dbd7099e-eb29-4bfe-b908-eca017c41de6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Program By ProgramID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"// pm.environment.unset(\"programId\");",
+									"// pm.environment.unset(\"programName\");",
+									"// Get the status code of the response",
+									"//var StatusCode = pm.response.code;",
+									"",
+									"//calling common methods",
+									"// if (pm.response.text() === '') {",
+									"//     console.log(\"Empty response received.\");",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// if(StatusCode === 200 && pm.response.text() !== ''){",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// var jsonData = pm.response.json();",
+									"// console.log(jsonData);",
+									"// eval(pm.environment.get(\"commonTests\"))();",
+									"// }",
+									"// }",
+									"// pm.collectionVariables.set(\"programId1\",null);",
+									"// pm.collectionVariables.set(\"programName1\",null);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "5f8b8c64-dd75-4882-8148-a34427f432b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				}
+			],
 			"id": "60d19aa4-0e84-49fe-82e7-6e3424d17b8b"
 		},
 		{
@@ -763,127 +885,6 @@
 				}
 			],
 			"id": "72f1d12d-ed44-4070-8772-f10d098c3a6c"
-		},
-		{
-			"name": "Delete Program By ProgramName",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
-						"exec": [
-							"// pm.environment.unset(\"programId2\");",
-							"// pm.environment.unset(\"programName2\");",
-							"",
-							"// const jsonData = pm.response.json();",
-							"// console.log(jsonData);",
-							"",
-							"// Get the status code of the response",
-							"// var StatusCode = pm.response.code;",
-							"",
-							"",
-							"// //calling common methods",
-							"// if (pm.response.text() === '') {",
-							"//     console.log(\"Empty response received.\");",
-							"//     pm.test(\"Validating Status Code\", ()=> {",
-							"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-							"// });",
-							"// }else{",
-							"// if(StatusCode === 200){",
-							"//     pm.test(\"Validating Status Code\", ()=> {",
-							"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-							"// });",
-							"// }else{",
-							"// var jsonData = pm.response.json();",
-							"// console.log(jsonData);",
-							"// eval(pm.environment.get(\"commonTests\"))();",
-							"// }",
-							"// }",
-							"// pm.collectionVariables.set(\"programId2\",null);",
-							"// pm.collectionVariables.set(\"programName2\",null);"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"id": "dbd7099e-eb29-4bfe-b908-eca017c41de6",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{baseUrl}}{{Endpoint}}"
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Program By ProgramID",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
-						"exec": [
-							"// pm.environment.unset(\"programId\");",
-							"// pm.environment.unset(\"programName\");",
-							"// Get the status code of the response",
-							"//var StatusCode = pm.response.code;",
-							"",
-							"//calling common methods",
-							"// if (pm.response.text() === '') {",
-							"//     console.log(\"Empty response received.\");",
-							"//     pm.test(\"Validating Status Code\", ()=> {",
-							"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-							"// });",
-							"// }else{",
-							"// if(StatusCode === 200 && pm.response.text() !== ''){",
-							"//     pm.test(\"Validating Status Code\", ()=> {",
-							"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-							"// });",
-							"// }else{",
-							"// var jsonData = pm.response.json();",
-							"// console.log(jsonData);",
-							"// eval(pm.environment.get(\"commonTests\"))();",
-							"// }",
-							"// }",
-							"// pm.collectionVariables.set(\"programId1\",null);",
-							"// pm.collectionVariables.set(\"programName1\",null);"
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"id": "5f8b8c64-dd75-4882-8148-a34427f432b0",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "{{baseUrl}}{{Endpoint}}"
-			},
-			"response": []
 		}
 	],
 	"event": [
