@@ -17,12 +17,8 @@
 								"id": "6de74170-eb9e-4c6a-8cfe-94d26e476ff6",
 								"exec": [
 									"var jsonData = pm.response.json();",
-									"//console.log(\"jsonData \" +jsonData);",
 									"pm.environment.set(\"AuthToken\",jsonData.token);",
 									"",
-									"// pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
 									""
 								],
 								"type": "text/javascript",
