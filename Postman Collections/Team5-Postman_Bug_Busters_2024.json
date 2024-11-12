@@ -924,7 +924,7 @@
 									"var programName=null;\r",
 									"var BatchName = null;\r",
 									"if(statusCode === 201){\r",
-									"  BatchName = \"PostmanBugBusters\" + pm.variables.replaceIn('{{$randomInt}}');\r",
+									"    BatchName = \"PostmanBugBusters\" + pm.variables.replaceIn('{{$randomInt}}');\r",
 									" pm.collectionVariables.set(\"batchName\", BatchName); \r",
 									"programId= pm.collectionVariables.get(programId1) ;   \r",
 									" programName= pm.collectionVariables.get(programName1) ;   \r",
@@ -985,7 +985,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"batchDescription\": \"{{batchDescription}}\",\r\n    \"batchName\": \"{{BatchName}}\",\r\n    \"batchNoOfClasses\": {{batchNoOfClasses}},\r\n    \"batchStatus\": \"{{batchStatus}}\",\r\n    \"programId\": {{programId}},\r\n    \"programName\": \"{{programName}}\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"batchDescription\": \"{{batchDescription}}\",\r\n    \"batchName\": \"{{batchName}}\",\r\n    \"batchNoOfClasses\": {{batchNoOfClasses}},\r\n    \"batchStatus\": \"{{batchStatus}}\",\r\n    \"programId\": {{programId}},\r\n    \"programName\": \"{{programName}}\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
