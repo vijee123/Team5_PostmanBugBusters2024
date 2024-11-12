@@ -528,17 +528,11 @@
 								"exec": [
 									"if (pm.response.text() === '') {",
 									"    console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
 									"}else{",
 									"var jsonData = pm.response.json();",
 									"console.log(jsonData);",
-									"",
-									"",
-									"//calling common methods",
-									"//eval(pm.environment.get(\"commonTests\"))();",
 									"}",
+									"",
 									"//Get the status code of the response",
 									"var StatusCode = pm.response.code;",
 									"",
@@ -640,6 +634,11 @@
 				}
 			],
 			"id": "68f2a055-3fcc-45f5-b32e-99f6df7eed03"
+		},
+		{
+			"name": "Class Module",
+			"item": [],
+			"id": "567e9b22-d570-49e5-b258-f900436b21ae"
 		},
 		{
 			"name": "User Role Module",
