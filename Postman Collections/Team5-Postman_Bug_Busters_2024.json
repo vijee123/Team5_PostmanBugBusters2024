@@ -69,6 +69,32 @@
 			"name": "Program Module",
 			"item": [
 				{
+					"name": "GET All Programs with Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64a1d76d-2a59-4ef3-957a-13441d3547ce",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "832daf17-9dfa-4c53-9eea-a15141204a6a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
 					"name": "Add New Program with Mandatory fields",
 					"event": [
 						{
@@ -200,9 +226,6 @@
 								"exec": [
 									"if (pm.response.text() === '') {",
 									"    console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
 									"}else{",
 									"var jsonData = pm.response.json();",
 									"console.log(jsonData);",
@@ -239,15 +262,9 @@
 									"  ]",
 									"}",
 									"",
-									"//calling common methods",
-									"//eval(pm.environment.get(\"commonTests\"))();",
-									"",
 									"",
 									"// Get the status code of the response",
 									"var StatusCode = pm.response.code;",
-									"// pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
 									"if(StatusCode === 201){",
 									"",
 									"    //calling jsonSchemaValidation methods",
@@ -331,18 +348,7 @@
 							"script": {
 								"id": "e972e993-45a7-4af6-97cf-6f6a4d18bc3f",
 								"exec": [
-									"// if (pm.response.text() === '') {",
-									"//     console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// const jsonData = pm.response.json();",
-									"// console.log(jsonData);",
-									"",
-									"// //calling common methods",
-									"// eval(pm.environment.get(\"commonTests\"))();",
-									"// }"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -370,43 +376,6 @@
 					"response": []
 				},
 				{
-					"name": "GET All Programs with Users",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "64a1d76d-2a59-4ef3-957a-13441d3547ce",
-								"exec": [
-									"// if (pm.response.text() === '') {",
-									"//     console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// const jsonData = pm.response.json();",
-									"// console.log(jsonData);",
-									"",
-									"// //calling common methods",
-									"// eval(pm.environment.get(\"commonTests\"))();",
-									"// }"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "832daf17-9dfa-4c53-9eea-a15141204a6a",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
 					"name": "GET Program by ProgramId",
 					"event": [
 						{
@@ -415,11 +384,7 @@
 								"id": "039e0266-6c3c-4517-a505-945c27ea36dd",
 								"exec": [
 									"const jsonData = pm.response.json();",
-									"console.log(jsonData);",
-									"",
-									"//calling common methods",
-									"//eval(pm.environment.get(\"commonTests\"))();",
-									""
+									"console.log(jsonData);"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -447,16 +412,10 @@
 								"exec": [
 									"if (pm.response.text() === '') {",
 									"    console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
 									"}else{",
 									"var jsonData = pm.response.json();",
 									"console.log(jsonData);",
 									"",
-									"",
-									"//calling common methods",
-									"//eval(pm.environment.get(\"commonTests\"))();",
 									"",
 									"// Get the status code of the response",
 									"var StatusCode = pm.response.code;",
@@ -686,19 +645,6 @@
 			"name": "User Role Module",
 			"item": [
 				{
-					"name": "Delete All Programs Batches assigned to the User By UserId",
-					"id": "d4f61b86-088a-4b5a-846e-9a904c200e88",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
 					"name": "Get Assigned Program/Batch(es) of All Users",
 					"id": "c042e4c8-fa7a-4dad-9972-cd4badf8d9b6",
 					"protocolProfileBehavior": {
@@ -719,6 +665,19 @@
 					},
 					"request": {
 						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Programs Batches assigned to the User By UserId",
+					"id": "d4f61b86-088a-4b5a-846e-9a904c200e88",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
 						"header": [],
 						"url": "{{baseUrl}}{{Endpoint}}"
 					},
