@@ -932,7 +932,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "fee6fc4a-04c1-4d56-9c54-776251ae2e2b",
+				"id": "2d0fcf36-f473-47de-a248-062b856f4504",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -986,14 +986,20 @@
 					"        break;",
 					"    default:",
 					"        console.log(\"Unknown authType: \" + AuthType); break;",
-					"}"
+					"}",
+					"",
+					"// Set the Request Method Dynamically",
+					" if (variables.method) {",
+					"    pm.request.method = variables.method;",
+					" }",
+					""
 				]
 			}
 		},
 		{
 			"listen": "test",
 			"script": {
-				"id": "7c359522-9d5e-4819-b3b1-82c180eb67e1",
+				"id": "287c66a9-a217-4ec9-a3ed-a08271cbb8c3",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
