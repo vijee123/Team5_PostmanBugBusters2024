@@ -652,6 +652,58 @@
 					"response": []
 				},
 				{
+					"name": "Get Class Recordings By Batch Id",
+					"id": "5205d5e1-265b-42cc-9953-a8c4be142f9d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{getBatchRecordingPathParam}}{{batchIdWithRecording}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Classes By Batch Id",
+					"id": "e569c1cb-749e-4269-a2a9-76546af36deb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{getClassesByBatchIdPathParam}}{{batchIDWithActiveStatus}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Classes By Staff Id",
+					"id": "329ff651-9d85-4d13-9e5d-d2163ea2a2de",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{getClassesByStaffID}}{{validStaffID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Class By Class Id",
+					"id": "118cdde0-2d61-4a84-9132-4f80e8a4c26d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseUrl}}{{deleteByClassPathParam}}{{classID}}"
+					},
+					"response": []
+				},
+				{
 					"name": "Create New Class",
 					"event": [
 						{
@@ -663,7 +715,20 @@
 									"pm.request.headers.add({\r",
 									"    key: \"Content-Type\",\r",
 									"    value: pm.variables.get(\"contentType\")\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.variables.set(\"classScheduledDates\", JSON.stringify(pm.variables.get(\"classScheduledDates\")));\r",
+									"\r",
+									"var Topic = null; \r",
+									"if(pm.variables.get(\"statusCode\") === 201){\r",
+									"     Topic = \"PostmanBugBusters-ClassTopic\" + pm.variables.replaceIn('{{$randomFirstName}}');\r",
+									"     pm.collectionVariables.set(\"Topic\", Topic);\r",
+									"     \r",
+									" }else{\r",
+									"    Topic = pm.variables.get(\"classTopic\");\r",
+									"    pm.collectionVariables.set(\"Topic\", Topic);\r",
+									"    }\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -675,6 +740,7 @@
 								"id": "13e3e252-a532-40c0-afde-0b9dfa4474fc",
 								"exec": [
 									"let jsonData = pm.response.json();\r",
+									"pm.collectionVariables.unset(\"Topic\");\r",
 									"\r",
 									"// //-------------SCHEMA VALIDATION---------------\r",
 									" var expectedSchema = {\r",
@@ -748,52 +814,43 @@
 									"        pm.response.to.have.jsonSchema(expectedSchema);\r",
 									"    });\r",
 									"\r",
-									"    //------------DATA TYPE VALIDATION----------------\r",
+									"   //------------DATA TYPE VALIDATION----------------\r",
+									"   pm.test(\"Data Type Validation\",()=>{\r",
+									"       \r",
+									"        // Validate batchId\r",
+									"        pm.expect(typeof jsonData.batchId).to.eql(\"number\", \"Expected 'batchId' to be a number\");\r",
 									"\r",
-									"//    pm.test(\"Data Type Validation\",()=>{\r",
+									"        // Validate classId\r",
+									"        pm.expect(typeof jsonData.csId).to.eql(\"number\", \"Expected 'csId' to be a number\");\r",
+									"\r",
+									"        // Validate classComments\r",
+									"        pm.expect(typeof jsonData.classComments).to.eql(\"string\" || \"null\", \"Expected 'classComments' to be a string\");\r",
 									"    \r",
-									"//         // Validate batchId\r",
-									"//         pm.expect(jsonData).to.have.property('batchId');\r",
-									"//         pm.expect(jsonData.user_first_name).to.satisfy(val => typeof val === 'number');\r",
-									"\r",
-									"//         // Validate classComments\r",
-									"//         pm.expect(jsonData).to.have.property('classComments');\r",
-									"//         pm.expect(jsonData.classComments).to.satisfy(val => typeof val === 'string' || val === null);\r",
-									"\r",
-									"//         // Validate classDate\r",
-									"//         pm.expect(jsonData).to.have.property('classDate');\r",
-									"//         pm.expect(jsonData.classDate).to.satisfy(val => typeof val === 'string' || val === null);\r",
-									"\r",
-									"//         // Validate classDescription\r",
-									"//         pm.expect(jsonData).to.have.property('classDescription');\r",
-									"//         pm.expect(jsonData.user_email_id).to.satisfy(val => typeof val === 'string' || val === null);\r",
-									"\r",
-									"//         // Validate classNo\r",
-									"//         pm.expect(jsonData).to.have.property('classNo');\r",
-									"//         pm.expect(jsonData.classNo).to.satisfy(val => typeof val === 'number');   \r",
-									"\r",
-									"//         // Validate classNotes\r",
-									"//         pm.expect(jsonData).to.have.property('classNotes');\r",
-									"//         pm.expect(jsonData.classNotes).to.satisfy(val => typeof val === 'string' \r",
-									"//         || val === null);\r",
-									"\r",
-									"//         // Validate classRecordingPath \r",
-									"//         pm.expect(jsonData).to.have.property('classRecordingPath');\r",
-									"//         pm.expect(jsonData.classRecordingPath).to.satisfy(val => typeof val === 'string' || val === null);\r",
-									"\r",
-									"//         // Validate classStaffId \r",
-									"//         pm.expect(jsonData).to.have.property('classStaffId');\r",
-									"//         pm.expect(jsonData.classStaffId).to.satisfy(val => typeof val === 'string');\r",
-									"\r",
-									"//         // Validate classTopic\r",
-									"//         pm.expect(jsonData).to.have.property('classTopic');\r",
-									"//         pm.expect(jsonData.classStaffId).to.satisfy(val => typeof val === 'string' || val === null);\r",
+									"        // Validate classDate\r",
+									"        pm.expect(typeof jsonData.classDate).to.eql(\"string\", \"Expected 'classDate' to be a string\");\r",
+									"    \r",
+									"        // Validate classDescription\r",
+									"        pm.expect(typeof jsonData.classDescription).to.eql(\"string\" || \"null\", \"Expected 'classDescription' to be a string\");\r",
+									"    \r",
+									"        // Validate classNotes\r",
+									"        pm.expect(typeof jsonData.classNotes).to.eql(\"string\" || \"null\", \"Expected 'classNotes' to be a string\");\r",
+									"    \r",
+									"        // Validate classRecordingPath \r",
+									"        pm.expect(typeof jsonData.classRecordingPath).to.eql(\"string\" || \"null\", \"Expected 'classRecordingPath' to be a string\");\r",
+									"    \r",
+									"        // Validate classStaffId \r",
+									"        pm.expect(typeof jsonData.classStaffId).to.eql(\"string\", \"Expected 'classStaffId' to be a string\");\r",
+									"    \r",
+									"        // Validate classTopic\r",
+									"        pm.expect(typeof jsonData.classTopic).to.eql(\"string\", \"Expected 'classTopic' to be a string\");\r",
+									"   \r",
+									"        // Validate classStatus\r",
+									"        pm.expect(typeof jsonData.classStatus).to.eql(\"string\", \"Expected 'classStatus' to be a string\");\r",
+									"   \r",
+									"        // Validate classScheduledDates\r",
+									"        pm.expect(typeof jsonData.classScheduledDates).to.eql(\"object\" || \"null\", \"Expected 'classScheduledDates' to be a object\");\r",
 									"        \r",
-									"//         // Validate classScheduledDates\r",
-									"//         pm.expect(jsonData).to.have.property('classScheduledDates');\r",
-									"//         pm.expect(jsonData.classScheduledDates).to.satisfy(val => typeof val === 'array' || val === null);\r",
-									"        \r",
-									"//         });\r",
+									"            });\r",
 									"\r",
 									" }\r",
 									"\r",
@@ -806,7 +863,7 @@
 							}
 						}
 					],
-					"id": "65026381-287d-4893-902a-39ab3a7ab8d1",
+					"id": "f517540c-5e60-4aa6-bfeb-9c036daa189a",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -815,7 +872,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"batchId\": {{batchId}},\r\n  \"classComments\": \"{{classComments}}\",\r\n  \"classDate\": \"{{classDate}}\",\r\n  \"classDescription\": \"{{classDescription}}\",\r\n  \"classNo\": {{classNo}},\r\n  \"classNotes\": \"{{classNotes}}\",\r\n  \"classRecordingPath\": \"{{classRecordingPath}}\",\r\n  \"classStaffId\": \"{{classStaffId}}\",\r\n  \"classTopic\": \"{{classTopic}}\",\r\n\"classScheduledDates\": \"{{classSCheduledDates}}\"\r\n    \r\n}",
+							"raw": "{\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"classComments\": \"{{classComments}}\",\r\n  \"classDate\": \"{{classDate}}\",\r\n  \"classDescription\": \"{{classDescription}}\",\r\n  \"classNo\": {{classNo}},\r\n  \"classNotes\": \"{{classNotes}}\",\r\n  \"classStatus\":\"{{classStatus}}\",\r\n  \"classRecordingPath\": \"{{classRecordingPath}}\",\r\n  \"classStaffId\": \"{{classStaffId}}\",\r\n  \"classTopic\": \"{{Topic}}\",\r\n\"classScheduledDates\": {{classScheduledDates}}\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -823,58 +880,6 @@
 							}
 						},
 						"url": "{{baseUrl}}{{EndPoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Class Recordings By Batch Id",
-					"id": "5205d5e1-265b-42cc-9953-a8c4be142f9d",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{getBatchRecordingPathParam}}{{batchIdWithRecording}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Classes By Batch Id",
-					"id": "e569c1cb-749e-4269-a2a9-76546af36deb",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{getClassesByBatchIdPathParam}}{{batchIDWithActiveStatus}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Classes By Staff Id",
-					"id": "329ff651-9d85-4d13-9e5d-d2163ea2a2de",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{getClassesByStaffID}}{{validStaffID}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Class By Class Id",
-					"id": "118cdde0-2d61-4a84-9132-4f80e8a4c26d",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "{{baseUrl}}{{deleteByClassPathParam}}{{classID}}"
 					},
 					"response": []
 				}
