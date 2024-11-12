@@ -24,6 +24,22 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4c04e16f-f270-4955-8c63-be8fc71eea3a",
+								"exec": [
+									"//--------- Set the Content Type Header-----------",
+									"pm.request.headers.add({",
+									"    key: \"Content-Type\",",
+									"    value: pm.variables.get(\"contentType\")",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"id": "a6a2f7f4-b6ed-4ca3-955a-a72f5fd719f2",
