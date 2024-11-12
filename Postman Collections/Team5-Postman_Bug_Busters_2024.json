@@ -665,6 +665,181 @@
 					"response": []
 				},
 				{
+					"name": "Create New Class",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2553e694-aa73-40bd-82c7-42ded575d949",
+								"exec": [
+									"//--------- Set the Content Type Header-----------\r",
+									"pm.request.headers.add({\r",
+									"    key: \"Content-Type\",\r",
+									"    value: pm.variables.get(\"contentType\")\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "13e3e252-a532-40c0-afde-0b9dfa4474fc",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"// //-------------SCHEMA VALIDATION---------------\r",
+									" var expectedSchema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"batchId\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"classComments\": {\r",
+									"      \"type\": [\"string\",\"null\"]\r",
+									"    },\r",
+									"    \"classDate\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"classDescription\": {\r",
+									"      \"type\": [\"string\",\"null\"]\r",
+									"    },\r",
+									"    \"classNo\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"classStatus\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"classNotes\": {\r",
+									"      \"type\": [\"string\",\"null\"]\r",
+									"    },\r",
+									"    \"classRecordingPath\": {\r",
+									"      \"type\": [\"string\",\"null\"]\r",
+									"    },\r",
+									"    \"classStaffId\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"classTopic\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"classScheduledDates\": {\r",
+									"      \"type\": [\"array\",\"null\"],\r",
+									"      \"items\": [\r",
+									"        {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"batchId\",\r",
+									"    \"classComments\",\r",
+									"    \"classDate\",\r",
+									"    \"classDescription\",\r",
+									"    \"classNo\",\r",
+									"    \"classStatus\",\r",
+									"    \"classNotes\",\r",
+									"    \"classRecordingPath\",\r",
+									"    \"classStaffId\",\r",
+									"    \"classTopic\",\r",
+									"    \"classScheduledDates\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"if(pm.variables.get(\"classComments\")===\"Create Class With All Valid details\")\r",
+									"{ \r",
+									"   //-----------COLLECTION VARIABLE SET UP---------\r",
+									"   pm.collectionVariables.set('classID',jsonData.csId);\r",
+									"   pm.collectionVariables.set('classTopic',jsonData.classTopic);\r",
+									"\r",
+									"   //-----------SCHEMA VALIDATION----------------\r",
+									"   pm.test(\"Verify JSON Schema using AJV\", function () {\r",
+									"        pm.response.to.have.jsonSchema(expectedSchema);\r",
+									"    });\r",
+									"\r",
+									"    //------------DATA TYPE VALIDATION----------------\r",
+									"\r",
+									"   pm.test(\"Data Type Validation\",()=>{\r",
+									"    \r",
+									"        // Validate batchId\r",
+									"        pm.expect(jsonData).to.have.property('batchId');\r",
+									"        pm.expect(jsonData.user_first_name).to.satisfy(val => typeof val === 'number');\r",
+									"\r",
+									"        // Validate classComments\r",
+									"        pm.expect(jsonData).to.have.property('classComments');\r",
+									"        pm.expect(jsonData.classComments).to.satisfy(val => typeof val === 'string' || val === null);\r",
+									"\r",
+									"        // Validate classDate\r",
+									"        pm.expect(jsonData).to.have.property('classDate');\r",
+									"        pm.expect(jsonData.classDate).to.satisfy(val => typeof val === 'string' || val === null);\r",
+									"\r",
+									"        // Validate classDescription\r",
+									"        pm.expect(jsonData).to.have.property('classDescription');\r",
+									"        pm.expect(jsonData.user_email_id).to.satisfy(val => typeof val === 'string' || val === null);\r",
+									"\r",
+									"        // Validate classNo\r",
+									"        pm.expect(jsonData).to.have.property('classNo');\r",
+									"        pm.expect(jsonData.classNo).to.satisfy(val => typeof val === 'number');   \r",
+									"\r",
+									"        // Validate classNotes\r",
+									"        pm.expect(jsonData).to.have.property('classNotes');\r",
+									"        pm.expect(jsonData.classNotes).to.satisfy(val => typeof val === 'string' \r",
+									"        || val === null);\r",
+									"\r",
+									"        // Validate classRecordingPath \r",
+									"        pm.expect(jsonData).to.have.property('classRecordingPath');\r",
+									"        pm.expect(jsonData.classRecordingPath).to.satisfy(val => typeof val === 'string' || val === null);\r",
+									"\r",
+									"        // Validate classStaffId \r",
+									"        pm.expect(jsonData).to.have.property('classStaffId');\r",
+									"        pm.expect(jsonData.classStaffId).to.satisfy(val => typeof val === 'string');\r",
+									"\r",
+									"        // Validate classTopic\r",
+									"        pm.expect(jsonData).to.have.property('classTopic');\r",
+									"        pm.expect(jsonData.classStaffId).to.satisfy(val => typeof val === 'string' || val === null);\r",
+									"        \r",
+									"        // Validate classScheduledDates\r",
+									"        pm.expect(jsonData).to.have.property('classScheduledDates');\r",
+									"        pm.expect(jsonData.classScheduledDates).to.satisfy(val => typeof val === 'array' || val === null);\r",
+									"        \r",
+									"        });\r",
+									"\r",
+									" }\r",
+									"\r",
+									" \r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "65026381-287d-4893-902a-39ab3a7ab8d1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"batchId\": {{batchId}},\r\n  \"classComments\": \"{{classComments}}\",\r\n  \"classDate\": \"{{classDate}}\",\r\n  \"classDescription\": \"{{classDescription}}\",\r\n  \"classNo\": {{classNo}},\r\n  \"classNotes\": \"{{classNotes}}\",\r\n  \"classRecordingPath\": \"{{classRecordingPath}}\",\r\n  \"classStaffId\": \"{{classStaffId}}\",\r\n  \"classTopic\": \"{{classTopic}}\",\r\n\"classScheduledDates\": \"{{classSCheduledDates}}\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{EndPoint}}"
+					},
+					"response": []
+				},
+				{
 					"name": "Get All Classes By Batch Id",
 					"id": "e569c1cb-749e-4269-a2a9-76546af36deb",
 					"protocolProfileBehavior": {
@@ -702,45 +877,6 @@
 						"url": "{{baseUrl}}{{deleteByClassPathParam}}{{classID}}"
 					},
 					"response": []
-				},
-				{
-					"name": "Create New Class",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "2553e694-aa73-40bd-82c7-42ded575d949",
-								"exec": [
-									"//--------- Set the Content Type Header-----------\r",
-									"pm.request.headers.add({\r",
-									"    key: \"Content-Type\",\r",
-									"    value: pm.variables.get(\"contentType\")\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "65026381-287d-4893-902a-39ab3a7ab8d1",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"batchId\": {{batchId}},\r\n  \"classComments\": \"{{classComments}}\",\r\n  \"classDate\": \"{{classDate}}\",\r\n  \"classDescription\": \"{{classDescription}}\",\r\n  \"classNo\": {{classNo}},\r\n  \"classNotes\": \"{{classNotes}}\",\r\n  \"classRecordingPath\": \"{{classRecordingPath}}\",\r\n  \"classStaffId\": \"{{classStaffId}}\",\r\n  \"classTopic\": \"{{classTopic}}\",\r\n\"classScheduledDates\": \"{{classSCheduledDates}}\"\r\n    \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{baseUrl}}{{EndPoint}}"
-					},
-					"response": []
 				}
 			],
 			"id": "68dc62cd-6625-4b10-b8f5-c53609071ad3"
@@ -773,7 +909,13 @@
 						"url": "{{baseUrl}}{{Endpoint}}"
 					},
 					"response": []
-				},
+				}
+			],
+			"id": "63b2a3ed-675b-459b-9783-373f3b6e27d5"
+		},
+		{
+			"name": "Delete and Data Cleanup",
+			"item": [
 				{
 					"name": "Delete All Programs Batches assigned to the User By UserId",
 					"id": "d4f61b86-088a-4b5a-846e-9a904c200e88",
@@ -786,13 +928,7 @@
 						"url": "{{baseUrl}}{{Endpoint}}"
 					},
 					"response": []
-				}
-			],
-			"id": "63b2a3ed-675b-459b-9783-373f3b6e27d5"
-		},
-		{
-			"name": "Delete and Data Cleanup",
-			"item": [
+				},
 				{
 					"name": "Delete Program By ProgramID",
 					"event": [
@@ -965,63 +1101,10 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "6db1a0c5-3bd2-4695-b19a-0c92e3c8f0a3",
+				"id": "942dd55d-218a-4d22-83ed-93e48f3a1210",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
-					"\r",
-					"//--------------Fetch Data from External JSON Data file-----------------\r",
-					"if (typeof pm.variables.get('requestdata') !== 'object') {\r",
-					"    pm.variables.set('requestdata', pm.iterationData.toObject());\r",
-					"}\r",
-					"const requestdata = pm.variables.get('requestdata');\r",
-					"\r",
-					"if(typeof requestdata !== 'object' || Object.keys(requestdata).length ===0) {\r",
-					"    console.log(\"No external file found\")\r",
-					"    return;\r",
-					"}\r",
-					"\r",
-					"const currentrequest = requestdata.requests.filter(({name}) => name === pm.info.requestName) [0];\r",
-					"if(!currentrequest){\r",
-					"    console.log(`Request ${pm.info.requestName} has no data defined.`);\r",
-					"}\r",
-					"\r",
-					"const variables = currentrequest.data.shift();\r",
-					"\r",
-					"Object.entries(variables).forEach(([key, value]) => {\r",
-					"        pm.variables.set(key, value);\r",
-					"    });\r",
-					"\r",
-					"pm.variables.set('requestdata',requestdata);\r",
-					"if(currentrequest.data.length > 0){\r",
-					"    pm.execution.setNextRequest(pm.info.requestName)\r",
-					"}\r",
-					" \r",
-					"//------------------ Authorization Set Up-----------------\r",
-					"pm.request.headers.clear(); // Clear all headers to prevent residual values\r",
-					"var AuthType = pm.variables.get(\"authType\");\r",
-					"switch (AuthType) {\r",
-					"    case \"No Auth\":\r",
-					"        pm.request.auth = { type: 'noauth' };\r",
-					"        break;\r",
-					"    case \"Bearer Token\":\r",
-					"        const authToken = pm.environment.get(\"AuthToken\");\r",
-					"        if (authToken) {\r",
-					"            pm.request.headers.add({ key: \"Authorization\", value: `Bearer ${authToken}` });}\r",
-					"         else {console.log(\"AuthToken is not set in the environment.\");}\r",
-					"        break;\r",
-					"    case \"Invalid Bearer token\":\r",
-					"        pm.request.headers.add({ key: \"Authorization\", value: \"invalid\" });\r",
-					"         console.log(\"Using invalid bearer token.\");\r",
-					"        break;\r",
-					"    default:\r",
-					"        console.log(\"Unknown authType: \" + AuthType); break;\r",
-					"}\r",
-					"\r",
-					"//-------------- Set the Request Method Dynamically---------------\r",
-					" if (variables.method) {\r",
-					"    pm.request.method = variables.method;\r",
-					" }\r",
 					"",
 					"//--------------Fetch Data from External JSON Data file-----------------",
 					"if (typeof pm.variables.get('requestdata') !== 'object') {",
@@ -1075,6 +1158,7 @@
 					" if (variables.method) {",
 					"    pm.request.method = variables.method;",
 					" }",
+					"",
 					""
 				]
 			}
@@ -1082,7 +1166,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "42ffdd07-394b-4659-9bf8-781af83889c6",
+				"id": "3b7e23bf-0039-4ed3-b8a4-82a0bdedb648",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
