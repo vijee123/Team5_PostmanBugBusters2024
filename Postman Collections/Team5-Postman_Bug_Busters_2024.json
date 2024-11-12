@@ -3292,7 +3292,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "942dd55d-218a-4d22-83ed-93e48f3a1210",
+				"id": "9a1051da-943e-4265-975d-02f5fe473681",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3357,7 +3357,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "3b7e23bf-0039-4ed3-b8a4-82a0bdedb648",
+				"id": "6dbfad21-49f8-4c57-9dd0-d9cd4db756af",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3515,6 +3515,26 @@
 		{
 			"key": "deleteByClassPathParam",
 			"value": "deleteByClass/",
+			"type": "string"
+		},
+		{
+			"key": "batchId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "batchName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "batchId2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "batchName2",
+			"value": "",
 			"type": "string"
 		}
 	]
