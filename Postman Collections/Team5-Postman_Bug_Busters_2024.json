@@ -938,7 +938,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "04e6541c-a62e-4ec9-bbd4-e6ff0b9dc5e8",
+				"id": "6db1a0c5-3bd2-4695-b19a-0c92e3c8f0a3",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -1055,7 +1055,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "75b2bf64-3aa3-4f79-88c1-3e2d0c00ee3f",
+				"id": "42ffdd07-394b-4659-9bf8-781af83889c6",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -1183,6 +1183,36 @@
 		{
 			"key": "classTopic",
 			"value": "Postman32oialpi3376",
+			"type": "string"
+		},
+		{
+			"key": "EndPoint",
+			"value": "CreateClassSchedule",
+			"type": "string"
+		},
+		{
+			"key": "getAllClassListEndpoint",
+			"value": "allClassses",
+			"type": "string"
+		},
+		{
+			"key": "getBatchRecordingPathParam",
+			"value": "batchRecordings/",
+			"type": "string"
+		},
+		{
+			"key": "getClassesByBatchIdPathParam",
+			"value": "classesbyBatch/",
+			"type": "string"
+		},
+		{
+			"key": "getClassesByStaffID",
+			"value": "classesByStaff/",
+			"type": "string"
+		},
+		{
+			"key": "deleteByClassPathParam",
+			"value": "deleteByClass/",
 			"type": "string"
 		}
 	]
