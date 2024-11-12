@@ -53,50 +53,6 @@
 			"name": "Program Module",
 			"item": [
 				{
-					"name": "Add New Program with Invalid Content Type",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "1a5fd139-b9ac-4ee4-94f5-ea0b4eb51eb7",
-								"exec": [
-									"// if (pm.response.text() === '') {",
-									"//     console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// const jsonData = pm.response.json();",
-									"// eval(pm.environment.get(\"commonTests\"))();",
-									"// }",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "e066eb13-8d1b-472b-be93-64c2c0520ce1",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"programName\": \"kafkaseven\",\n  \"programDescription\": \"kafka program\",\n  \"programStatus\": \"active\"\n}",
-							"options": {
-								"raw": {
-									"language": "html"
-								}
-							}
-						},
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
 					"name": "Add New Program with Mandatory fields",
 					"event": [
 						{
@@ -177,6 +133,12 @@
 							"script": {
 								"id": "c5b6d587-8c23-4093-9512-a71b90f5cccc",
 								"exec": [
+									"//--------- Set the Content Type Header-----------",
+									"pm.request.headers.add({",
+									"    key: \"Content-Type\",",
+									"    value: pm.variables.get(\"contentType\")",
+									"});",
+									"",
 									"var statusCode = pm.variables.get(\"statusCode\");",
 									"console.log(\"statusCode \"+statusCode);",
 									"if(statusCode === 201){",
@@ -304,6 +266,12 @@
 							"script": {
 								"id": "9883b5a5-117a-4761-9cff-4a6092dc4fd8",
 								"exec": [
+									"//--------- Set the Content Type Header-----------",
+									"pm.request.headers.add({",
+									"    key: \"Content-Type\",",
+									"    value: pm.variables.get(\"contentType\")",
+									"});",
+									"",
 									"var statusCode = pm.variables.get(\"statusCode\");",
 									"console.log(\"statusCode \"+statusCode);",
 									"if(statusCode === 201){",
@@ -538,6 +506,21 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "997e55f1-e809-4442-a165-d39b65c1cdce",
+								"exec": [
+									"//--------- Set the Content Type Header-----------",
+									"pm.request.headers.add({",
+									"    key: \"Content-Type\",",
+									"    value: pm.variables.get(\"contentType\")",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"id": "aeec94f5-b9e5-4cb9-be55-51b90fc3c5d3",
@@ -639,6 +622,21 @@
 									"// //pm.collectionVariables.set(\"programId\",jsonData.programId);",
 									"// pm.collectionVariables.set(\"programName\",jsonData.programName);",
 									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a234965f-a8c8-4c8c-b417-1398597f7048",
+								"exec": [
+									"//--------- Set the Content Type Header-----------",
+									"pm.request.headers.add({",
+									"    key: \"Content-Type\",",
+									"    value: pm.variables.get(\"contentType\")",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
