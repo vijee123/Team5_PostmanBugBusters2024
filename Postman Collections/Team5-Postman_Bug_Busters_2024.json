@@ -860,10 +860,12 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "8f988ff0-6f8c-4aef-8bfa-2cee712c337b",
+				"id": "e9be6a91-98c4-4634-a26d-2057ea30fd03",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
+					"",
+					"//--------------Fetch Data from External JSON Data file-----------------",
 					"if (typeof pm.variables.get('requestdata') !== 'object') {",
 					"    pm.variables.set('requestdata', pm.iterationData.toObject());",
 					"}",
@@ -911,7 +913,7 @@
 					"        console.log(\"Unknown authType: \" + AuthType); break;",
 					"}",
 					"",
-					"// Set the Request Method Dynamically",
+					"//-------------- Set the Request Method Dynamically---------------",
 					" if (variables.method) {",
 					"    pm.request.method = variables.method;",
 					" }",
@@ -922,7 +924,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "e39d2e7f-286a-4405-8bc6-bcd4952a4df4",
+				"id": "9b75d4cf-03d9-4ab3-bf38-db5768258124",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
