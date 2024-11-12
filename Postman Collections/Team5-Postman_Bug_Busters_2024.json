@@ -899,19 +899,6 @@
 					"response": []
 				},
 				{
-					"name": "Delete Program/Batch(es) invalidMethod",
-					"id": "1d088952-48a8-4803-b28e-fccaca079ab2",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
 					"name": "Get Assigned Program/Batch(es) of All Users",
 					"id": "c042e4c8-fa7a-4dad-9972-cd4badf8d9b6",
 					"protocolProfileBehavior": {
