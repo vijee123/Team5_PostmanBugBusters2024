@@ -1311,7 +1311,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "c8ea06cc-0096-4f89-8f2c-148cc767fab3",
+				"id": "a380cf8c-9216-4656-80d5-27bba9b94193",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -1428,7 +1428,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "c6a496e6-c04f-4b04-a4d9-34e023ca5129",
+				"id": "31c4deee-2621-4229-878a-53e0e5bfc99b",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -1526,6 +1526,21 @@
 		{
 			"key": "batchIdWithoutRecording",
 			"value": "8695",
+			"type": "string"
+		},
+		{
+			"key": "batchIDWithActiveStatus",
+			"value": "8454",
+			"type": "string"
+		},
+		{
+			"key": "validStaffID",
+			"value": "U02",
+			"type": "string"
+		},
+		{
+			"key": "classID",
+			"value": "901",
 			"type": "string"
 		}
 	]
