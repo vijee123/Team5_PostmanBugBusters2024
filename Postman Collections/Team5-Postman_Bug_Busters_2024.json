@@ -1311,7 +1311,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "e9be6a91-98c4-4634-a26d-2057ea30fd03",
+				"id": "c8ea06cc-0096-4f89-8f2c-148cc767fab3",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -1428,7 +1428,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "9b75d4cf-03d9-4ab3-bf38-db5768258124",
+				"id": "c6a496e6-c04f-4b04-a4d9-34e023ca5129",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -1517,6 +1517,16 @@
 		{
 			"key": "invalidProgramName",
 			"value": "zwq"
+		},
+		{
+			"key": "batchIdWithRecording",
+			"value": "8433",
+			"type": "string"
+		},
+		{
+			"key": "batchIdWithoutRecording",
+			"value": "8695",
+			"type": "string"
 		}
 	]
 }
