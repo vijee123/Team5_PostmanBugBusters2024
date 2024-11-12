@@ -3292,7 +3292,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "9a1051da-943e-4265-975d-02f5fe473681",
+				"id": "aeb3c1e8-444f-4925-8557-35303d53ae8c",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3357,7 +3357,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "6dbfad21-49f8-4c57-9dd0-d9cd4db756af",
+				"id": "bf960003-732e-45be-95cb-d7d270a57e97",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3441,7 +3441,8 @@
 		},
 		{
 			"key": "invalidProgramId",
-			"value": "1234567"
+			"value": "1234567",
+			"type": "string"
 		},
 		{
 			"key": "invalidProgramName",
