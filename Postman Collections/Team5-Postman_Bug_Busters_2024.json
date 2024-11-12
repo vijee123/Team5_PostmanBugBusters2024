@@ -667,6 +667,51 @@
 			"id": "68f2a055-3fcc-45f5-b32e-99f6df7eed03"
 		},
 		{
+			"name": "User Role Module",
+			"item": [
+				{
+					"name": "Delete All Programs Batches assigned to the User By UserId",
+					"id": "d4f61b86-088a-4b5a-846e-9a904c200e88",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Assigned Program/Batch(es) of All Users",
+					"id": "c042e4c8-fa7a-4dad-9972-cd4badf8d9b6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Assigned Program/Batch of a User By User Id",
+					"id": "00e79f58-66ee-40b5-9a65-a727af903db7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"id": "63b2a3ed-675b-459b-9783-373f3b6e27d5"
+		},
+		{
 			"name": "Delete and Data Cleanup",
 			"item": [
 				{
@@ -835,51 +880,6 @@
 				}
 			],
 			"id": "72f1d12d-ed44-4070-8772-f10d098c3a6c"
-		},
-		{
-			"name": "User Role Module",
-			"item": [
-				{
-					"name": "Delete All Programs Batches assigned to the User By UserId",
-					"id": "d4f61b86-088a-4b5a-846e-9a904c200e88",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Assigned Program/Batch(es) of All Users",
-					"id": "c042e4c8-fa7a-4dad-9972-cd4badf8d9b6",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Assigned Program/Batch of a User By User Id",
-					"id": "00e79f58-66ee-40b5-9a65-a727af903db7",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				}
-			],
-			"id": "63b2a3ed-675b-459b-9783-373f3b6e27d5"
 		}
 	],
 	"event": [
