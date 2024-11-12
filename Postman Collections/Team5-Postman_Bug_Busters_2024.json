@@ -636,472 +636,6 @@
 			"id": "68f2a055-3fcc-45f5-b32e-99f6df7eed03"
 		},
 		{
-			"name": "Class Module",
-			"item": [
-				{
-					"name": "Get All Class List",
-					"id": "2db95ec4-17ee-4c4f-b417-fea318601d50",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{getAllClassListEndpoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Create New Class",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "2553e694-aa73-40bd-82c7-42ded575d949",
-								"exec": [
-									"//--------- Set the Content Type Header-----------\r",
-									"pm.request.headers.add({\r",
-									"    key: \"Content-Type\",\r",
-									"    value: pm.variables.get(\"contentType\")\r",
-									"});\r",
-									"\r",
-									"pm.variables.set(\"classScheduledDates\", JSON.stringify(pm.variables.get(\"classScheduledDates\")));\r",
-									"\r",
-									"var Topic = null; \r",
-									"if(pm.variables.get(\"statusCode\") === 201){\r",
-									"     Topic = \"PostmanBugBusters-ClassTopic\" + pm.variables.replaceIn('{{$randomFirstName}}');\r",
-									"     pm.collectionVariables.set(\"Topic\", Topic);\r",
-									"     \r",
-									" }else{\r",
-									"    Topic = pm.variables.get(\"classTopic\");\r",
-									"    pm.collectionVariables.set(\"Topic\", Topic);\r",
-									"    }\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "13e3e252-a532-40c0-afde-0b9dfa4474fc",
-								"exec": [
-									"let jsonData = pm.response.json();\r",
-									"pm.collectionVariables.unset(\"Topic\");\r",
-									"\r",
-									"// //-------------SCHEMA VALIDATION---------------\r",
-									" var expectedSchema = {\r",
-									"  \"type\": \"object\",\r",
-									"  \"properties\": {\r",
-									"    \"batchId\": {\r",
-									"      \"type\": \"integer\"\r",
-									"    },\r",
-									"    \"classComments\": {\r",
-									"      \"type\": [\"string\",\"null\"]\r",
-									"    },\r",
-									"    \"classDate\": {\r",
-									"      \"type\": \"string\"\r",
-									"    },\r",
-									"    \"classDescription\": {\r",
-									"      \"type\": [\"string\",\"null\"]\r",
-									"    },\r",
-									"    \"classNo\": {\r",
-									"      \"type\": \"integer\"\r",
-									"    },\r",
-									"    \"classStatus\": {\r",
-									"      \"type\": \"string\"\r",
-									"    },\r",
-									"    \"classNotes\": {\r",
-									"      \"type\": [\"string\",\"null\"]\r",
-									"    },\r",
-									"    \"classRecordingPath\": {\r",
-									"      \"type\": [\"string\",\"null\"]\r",
-									"    },\r",
-									"    \"classStaffId\": {\r",
-									"      \"type\": \"string\"\r",
-									"    },\r",
-									"    \"classTopic\": {\r",
-									"      \"type\": \"string\"\r",
-									"    },\r",
-									"    \"classScheduledDates\": {\r",
-									"      \"type\": [\"array\",\"null\"],\r",
-									"      \"items\": [\r",
-									"        {\r",
-									"          \"type\": \"string\"\r",
-									"        },\r",
-									"        {\r",
-									"          \"type\": \"string\"\r",
-									"        }\r",
-									"      ]\r",
-									"    }\r",
-									"  },\r",
-									"  \"required\": [\r",
-									"    \"batchId\",\r",
-									"    \"classComments\",\r",
-									"    \"classDate\",\r",
-									"    \"classDescription\",\r",
-									"    \"classNo\",\r",
-									"    \"classStatus\",\r",
-									"    \"classNotes\",\r",
-									"    \"classRecordingPath\",\r",
-									"    \"classStaffId\",\r",
-									"    \"classTopic\",\r",
-									"    \"classScheduledDates\"\r",
-									"  ]\r",
-									"}\r",
-									"\r",
-									"if(pm.variables.get(\"classComments\")===\"Create Class With All Valid details\")\r",
-									"{ \r",
-									"   //-----------COLLECTION VARIABLE SET UP---------\r",
-									"   pm.collectionVariables.set('classID',jsonData.csId);\r",
-									"   pm.collectionVariables.set('classTopic',jsonData.classTopic);\r",
-									"\r",
-									"   //-----------SCHEMA VALIDATION----------------\r",
-									"   pm.test(\"Verify JSON Schema using AJV\", function () {\r",
-									"        pm.response.to.have.jsonSchema(expectedSchema);\r",
-									"    });\r",
-									"\r",
-									"   //------------DATA TYPE VALIDATION----------------\r",
-									"   pm.test(\"Data Type Validation\",()=>{\r",
-									"       \r",
-									"        // Validate batchId\r",
-									"        pm.expect(typeof jsonData.batchId).to.eql(\"number\", \"Expected 'batchId' to be a number\");\r",
-									"\r",
-									"        // Validate classId\r",
-									"        pm.expect(typeof jsonData.csId).to.eql(\"number\", \"Expected 'csId' to be a number\");\r",
-									"\r",
-									"        // Validate classComments\r",
-									"        pm.expect(typeof jsonData.classComments).to.eql(\"string\" || \"null\", \"Expected 'classComments' to be a string\");\r",
-									"    \r",
-									"        // Validate classDate\r",
-									"        pm.expect(typeof jsonData.classDate).to.eql(\"string\", \"Expected 'classDate' to be a string\");\r",
-									"    \r",
-									"        // Validate classDescription\r",
-									"        pm.expect(typeof jsonData.classDescription).to.eql(\"string\" || \"null\", \"Expected 'classDescription' to be a string\");\r",
-									"    \r",
-									"        // Validate classNotes\r",
-									"        pm.expect(typeof jsonData.classNotes).to.eql(\"string\" || \"null\", \"Expected 'classNotes' to be a string\");\r",
-									"    \r",
-									"        // Validate classRecordingPath \r",
-									"        pm.expect(typeof jsonData.classRecordingPath).to.eql(\"string\" || \"null\", \"Expected 'classRecordingPath' to be a string\");\r",
-									"    \r",
-									"        // Validate classStaffId \r",
-									"        pm.expect(typeof jsonData.classStaffId).to.eql(\"string\", \"Expected 'classStaffId' to be a string\");\r",
-									"    \r",
-									"        // Validate classTopic\r",
-									"        pm.expect(typeof jsonData.classTopic).to.eql(\"string\", \"Expected 'classTopic' to be a string\");\r",
-									"   \r",
-									"        // Validate classStatus\r",
-									"        pm.expect(typeof jsonData.classStatus).to.eql(\"string\", \"Expected 'classStatus' to be a string\");\r",
-									"   \r",
-									"        // Validate classScheduledDates\r",
-									"        pm.expect(typeof jsonData.classScheduledDates).to.eql(\"object\" || \"null\", \"Expected 'classScheduledDates' to be a object\");\r",
-									"        \r",
-									"            });\r",
-									"\r",
-									" }\r",
-									"\r",
-									" \r",
-									"\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "f517540c-5e60-4aa6-bfeb-9c036daa189a",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"classComments\": \"{{classComments}}\",\r\n  \"classDate\": \"{{classDate}}\",\r\n  \"classDescription\": \"{{classDescription}}\",\r\n  \"classNo\": {{classNo}},\r\n  \"classNotes\": \"{{classNotes}}\",\r\n  \"classStatus\":\"{{classStatus}}\",\r\n  \"classRecordingPath\": \"{{classRecordingPath}}\",\r\n  \"classStaffId\": \"{{classStaffId}}\",\r\n  \"classTopic\": \"{{Topic}}\",\r\n\"classScheduledDates\": {{classScheduledDates}}\r\n    \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{baseUrl}}{{EndPoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Class Recordings By Batch Id",
-					"id": "5205d5e1-265b-42cc-9953-a8c4be142f9d",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{getBatchRecordingPathParam}}{{batchIdWithRecording}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Classes By Batch Id",
-					"id": "e569c1cb-749e-4269-a2a9-76546af36deb",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{getClassesByBatchIdPathParam}}{{batchIDWithActiveStatus}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Classes By Staff Id",
-					"id": "329ff651-9d85-4d13-9e5d-d2163ea2a2de",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{getClassesByStaffID}}{{validStaffID}}"
-					},
-					"response": []
-				}
-			],
-			"id": "68dc62cd-6625-4b10-b8f5-c53609071ad3"
-		},
-		{
-			"name": "User Role Module",
-			"item": [
-				{
-					"name": "Get Assigned Program/Batch(es) of All Users",
-					"id": "c042e4c8-fa7a-4dad-9972-cd4badf8d9b6",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Assigned Program/Batch of a User By User Id",
-					"id": "00e79f58-66ee-40b5-9a65-a727af903db7",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				}
-			],
-			"id": "63b2a3ed-675b-459b-9783-373f3b6e27d5"
-		},
-		{
-			"name": "Delete and Data Cleanup",
-			"item": [
-				{
-					"name": "Delete All Programs Batches assigned to the User By UserId",
-					"id": "d4f61b86-088a-4b5a-846e-9a904c200e88",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Program By ProgramID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
-								"exec": [
-									"// pm.environment.unset(\"programId\");",
-									"// pm.environment.unset(\"programName\");",
-									"// Get the status code of the response",
-									"//var StatusCode = pm.response.code;",
-									"",
-									"//calling common methods",
-									"// if (pm.response.text() === '') {",
-									"//     console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// if(StatusCode === 200 && pm.response.text() !== ''){",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// var jsonData = pm.response.json();",
-									"// console.log(jsonData);",
-									"// eval(pm.environment.get(\"commonTests\"))();",
-									"// }",
-									"// }",
-									"// pm.collectionVariables.set(\"programId1\",null);",
-									"// pm.collectionVariables.set(\"programName1\",null);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "5f8b8c64-dd75-4882-8148-a34427f432b0",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Program By ProgramName",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
-								"exec": [
-									"// pm.environment.unset(\"programId2\");",
-									"// pm.environment.unset(\"programName2\");",
-									"",
-									"// const jsonData = pm.response.json();",
-									"// console.log(jsonData);",
-									"",
-									"// Get the status code of the response",
-									"// var StatusCode = pm.response.code;",
-									"",
-									"",
-									"// //calling common methods",
-									"// if (pm.response.text() === '') {",
-									"//     console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// if(StatusCode === 200){",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// var jsonData = pm.response.json();",
-									"// console.log(jsonData);",
-									"// eval(pm.environment.get(\"commonTests\"))();",
-									"// }",
-									"// }",
-									"// pm.collectionVariables.set(\"programId2\",null);",
-									"// pm.collectionVariables.set(\"programName2\",null);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "dbd7099e-eb29-4bfe-b908-eca017c41de6",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Class By Class Id",
-					"id": "118cdde0-2d61-4a84-9132-4f80e8a4c26d",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": "{{baseUrl}}{{deleteByClassPathParam}}{{classID}}"
-					},
-					"response": []
-				}
-			],
-			"id": "60d19aa4-0e84-49fe-82e7-6e3424d17b8b"
-		},
-		{
-			"name": "Logout",
-			"item": [
-				{
-					"name": "Logout",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
-								"exec": [
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "23a1c8e6-5d3a-4bff-9c99-c8ab5f976ff7",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				}
-			],
-			"id": "72f1d12d-ed44-4070-8772-f10d098c3a6c"
-		},
-		{
 			"name": "Batch Module",
 			"item": [
 				{
@@ -1390,8 +924,8 @@
 									"var programName=null;\r",
 									"\r",
 									"if(statusCode === 201){\r",
-									"  var batchName = \"PostmanBugBusters\" + pm.variables.replaceIn('{{$randomInt}}');\r",
-									" pm.collectionVariables.set(\"batchName\", batchName); \r",
+									"  var BatchName = \"PostmanBugBusters\" + pm.variables.replaceIn('{{$randomInt}}');\r",
+									" pm.collectionVariables.set(\"batchName\", BatchName); \r",
 									"programId= pm.collectionVariables.get(programId1) ;   \r",
 									" programName= pm.collectionVariables.get(programName1) ;   \r",
 									"}else{\r",
@@ -1451,7 +985,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"batchDescription\": \"{{batchDescription}}\",\r\n    \"batchName\": \"{{batchName}}\",\r\n    \"batchNoOfClasses\": {{batchNoOfClasses}},\r\n    \"batchStatus\": \"{{batchStatus}}\",\r\n    \"programId\": {{programId}},\r\n    \"programName\": \"{{programName}}\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"batchDescription\": \"{{batchDescription}}\",\r\n    \"batchName\": \"{{BatchName}}\",\r\n    \"batchNoOfClasses\": {{batchNoOfClasses}},\r\n    \"batchStatus\": \"{{batchStatus}}\",\r\n    \"programId\": {{programId}},\r\n    \"programName\": \"{{programName}}\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3209,6 +2743,416 @@
 							"body": "{\n    \"batchId\": 9058,\n    \"batchName\": \"SDET\",\n    \"batchDescription\": \"created by saranya \",\n    \"batchStatus\": \"Active\",\n    \"batchNoOfClasses\": 15,\n    \"programId\": 16736,\n    \"programName\": \"Playwrightclass\"\n}"
 						}
 					]
+				}
+			],
+			"id": "168048be-c0ab-4ba1-ba43-084d53c30c58"
+		},
+		{
+			"name": "Class Module",
+			"item": [
+				{
+					"name": "Get All Class List",
+					"id": "2db95ec4-17ee-4c4f-b417-fea318601d50",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{getAllClassListEndpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Class",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2553e694-aa73-40bd-82c7-42ded575d949",
+								"exec": [
+									"//--------- Set the Content Type Header-----------\r",
+									"pm.request.headers.add({\r",
+									"    key: \"Content-Type\",\r",
+									"    value: pm.variables.get(\"contentType\")\r",
+									"});\r",
+									"\r",
+									"pm.variables.set(\"classScheduledDates\", JSON.stringify(pm.variables.get(\"classScheduledDates\")));\r",
+									"\r",
+									"var Topic = null; \r",
+									"if(pm.variables.get(\"statusCode\") === 201){\r",
+									"     Topic = \"PostmanBugBusters-ClassTopic\" + pm.variables.replaceIn('{{$randomFirstName}}');\r",
+									"     pm.collectionVariables.set(\"Topic\", Topic);\r",
+									"     \r",
+									" }else{\r",
+									"    Topic = pm.variables.get(\"classTopic\");\r",
+									"    pm.collectionVariables.set(\"Topic\", Topic);\r",
+									"    }\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "13e3e252-a532-40c0-afde-0b9dfa4474fc",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.collectionVariables.unset(\"Topic\");\r",
+									"\r",
+									"// //-------------SCHEMA VALIDATION---------------\r",
+									" var expectedSchema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"batchId\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"classComments\": {\r",
+									"      \"type\": [\"string\",\"null\"]\r",
+									"    },\r",
+									"    \"classDate\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"classDescription\": {\r",
+									"      \"type\": [\"string\",\"null\"]\r",
+									"    },\r",
+									"    \"classNo\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"classStatus\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"classNotes\": {\r",
+									"      \"type\": [\"string\",\"null\"]\r",
+									"    },\r",
+									"    \"classRecordingPath\": {\r",
+									"      \"type\": [\"string\",\"null\"]\r",
+									"    },\r",
+									"    \"classStaffId\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"classTopic\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"classScheduledDates\": {\r",
+									"      \"type\": [\"array\",\"null\"],\r",
+									"      \"items\": [\r",
+									"        {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"batchId\",\r",
+									"    \"classComments\",\r",
+									"    \"classDate\",\r",
+									"    \"classDescription\",\r",
+									"    \"classNo\",\r",
+									"    \"classStatus\",\r",
+									"    \"classNotes\",\r",
+									"    \"classRecordingPath\",\r",
+									"    \"classStaffId\",\r",
+									"    \"classTopic\",\r",
+									"    \"classScheduledDates\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"if(pm.variables.get(\"classComments\")===\"Create Class With All Valid details\")\r",
+									"{ \r",
+									"   //-----------COLLECTION VARIABLE SET UP---------\r",
+									"   pm.collectionVariables.set('classID',jsonData.csId);\r",
+									"   pm.collectionVariables.set('classTopic',jsonData.classTopic);\r",
+									"\r",
+									"   //-----------SCHEMA VALIDATION----------------\r",
+									"   pm.test(\"Verify JSON Schema using AJV\", function () {\r",
+									"        pm.response.to.have.jsonSchema(expectedSchema);\r",
+									"    });\r",
+									"\r",
+									"   //------------DATA TYPE VALIDATION----------------\r",
+									"   pm.test(\"Data Type Validation\",()=>{\r",
+									"       \r",
+									"        // Validate batchId\r",
+									"        pm.expect(typeof jsonData.batchId).to.eql(\"number\", \"Expected 'batchId' to be a number\");\r",
+									"\r",
+									"        // Validate classId\r",
+									"        pm.expect(typeof jsonData.csId).to.eql(\"number\", \"Expected 'csId' to be a number\");\r",
+									"\r",
+									"        // Validate classComments\r",
+									"        pm.expect(typeof jsonData.classComments).to.eql(\"string\" || \"null\", \"Expected 'classComments' to be a string\");\r",
+									"    \r",
+									"        // Validate classDate\r",
+									"        pm.expect(typeof jsonData.classDate).to.eql(\"string\", \"Expected 'classDate' to be a string\");\r",
+									"    \r",
+									"        // Validate classDescription\r",
+									"        pm.expect(typeof jsonData.classDescription).to.eql(\"string\" || \"null\", \"Expected 'classDescription' to be a string\");\r",
+									"    \r",
+									"        // Validate classNotes\r",
+									"        pm.expect(typeof jsonData.classNotes).to.eql(\"string\" || \"null\", \"Expected 'classNotes' to be a string\");\r",
+									"    \r",
+									"        // Validate classRecordingPath \r",
+									"        pm.expect(typeof jsonData.classRecordingPath).to.eql(\"string\" || \"null\", \"Expected 'classRecordingPath' to be a string\");\r",
+									"    \r",
+									"        // Validate classStaffId \r",
+									"        pm.expect(typeof jsonData.classStaffId).to.eql(\"string\", \"Expected 'classStaffId' to be a string\");\r",
+									"    \r",
+									"        // Validate classTopic\r",
+									"        pm.expect(typeof jsonData.classTopic).to.eql(\"string\", \"Expected 'classTopic' to be a string\");\r",
+									"   \r",
+									"        // Validate classStatus\r",
+									"        pm.expect(typeof jsonData.classStatus).to.eql(\"string\", \"Expected 'classStatus' to be a string\");\r",
+									"   \r",
+									"        // Validate classScheduledDates\r",
+									"        pm.expect(typeof jsonData.classScheduledDates).to.eql(\"object\" || \"null\", \"Expected 'classScheduledDates' to be a object\");\r",
+									"        \r",
+									"            });\r",
+									"\r",
+									" }\r",
+									"\r",
+									" \r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "f517540c-5e60-4aa6-bfeb-9c036daa189a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"classComments\": \"{{classComments}}\",\r\n  \"classDate\": \"{{classDate}}\",\r\n  \"classDescription\": \"{{classDescription}}\",\r\n  \"classNo\": {{classNo}},\r\n  \"classNotes\": \"{{classNotes}}\",\r\n  \"classStatus\":\"{{classStatus}}\",\r\n  \"classRecordingPath\": \"{{classRecordingPath}}\",\r\n  \"classStaffId\": \"{{classStaffId}}\",\r\n  \"classTopic\": \"{{Topic}}\",\r\n\"classScheduledDates\": {{classScheduledDates}}\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{EndPoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Class Recordings By Batch Id",
+					"id": "5205d5e1-265b-42cc-9953-a8c4be142f9d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{getBatchRecordingPathParam}}{{batchIdWithRecording}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Classes By Batch Id",
+					"id": "e569c1cb-749e-4269-a2a9-76546af36deb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{getClassesByBatchIdPathParam}}{{batchIDWithActiveStatus}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Classes By Staff Id",
+					"id": "329ff651-9d85-4d13-9e5d-d2163ea2a2de",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{getClassesByStaffID}}{{validStaffID}}"
+					},
+					"response": []
+				}
+			],
+			"id": "68dc62cd-6625-4b10-b8f5-c53609071ad3"
+		},
+		{
+			"name": "User Role Module",
+			"item": [
+				{
+					"name": "Get Assigned Program/Batch(es) of All Users",
+					"id": "c042e4c8-fa7a-4dad-9972-cd4badf8d9b6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Assigned Program/Batch of a User By User Id",
+					"id": "00e79f58-66ee-40b5-9a65-a727af903db7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"id": "63b2a3ed-675b-459b-9783-373f3b6e27d5"
+		},
+		{
+			"name": "Delete and Data Cleanup",
+			"item": [
+				{
+					"name": "Delete All Programs Batches assigned to the User By UserId",
+					"id": "d4f61b86-088a-4b5a-846e-9a904c200e88",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Program By ProgramID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"// pm.environment.unset(\"programId\");",
+									"// pm.environment.unset(\"programName\");",
+									"// Get the status code of the response",
+									"//var StatusCode = pm.response.code;",
+									"",
+									"//calling common methods",
+									"// if (pm.response.text() === '') {",
+									"//     console.log(\"Empty response received.\");",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// if(StatusCode === 200 && pm.response.text() !== ''){",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// var jsonData = pm.response.json();",
+									"// console.log(jsonData);",
+									"// eval(pm.environment.get(\"commonTests\"))();",
+									"// }",
+									"// }",
+									"// pm.collectionVariables.set(\"programId1\",null);",
+									"// pm.collectionVariables.set(\"programName1\",null);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "5f8b8c64-dd75-4882-8148-a34427f432b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Program By ProgramName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"// pm.environment.unset(\"programId2\");",
+									"// pm.environment.unset(\"programName2\");",
+									"",
+									"// const jsonData = pm.response.json();",
+									"// console.log(jsonData);",
+									"",
+									"// Get the status code of the response",
+									"// var StatusCode = pm.response.code;",
+									"",
+									"",
+									"// //calling common methods",
+									"// if (pm.response.text() === '') {",
+									"//     console.log(\"Empty response received.\");",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// if(StatusCode === 200){",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// var jsonData = pm.response.json();",
+									"// console.log(jsonData);",
+									"// eval(pm.environment.get(\"commonTests\"))();",
+									"// }",
+									"// }",
+									"// pm.collectionVariables.set(\"programId2\",null);",
+									"// pm.collectionVariables.set(\"programName2\",null);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "dbd7099e-eb29-4bfe-b908-eca017c41de6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
 				},
 				{
 					"name": "Delete Batch by BatchId",
@@ -3283,9 +3227,65 @@
 						"url": "{{baseUrl}}{{endpoint}}"
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Class By Class Id",
+					"id": "118cdde0-2d61-4a84-9132-4f80e8a4c26d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseUrl}}{{deleteByClassPathParam}}{{classID}}"
+					},
+					"response": []
 				}
 			],
-			"id": "168048be-c0ab-4ba1-ba43-084d53c30c58"
+			"id": "60d19aa4-0e84-49fe-82e7-6e3424d17b8b"
+		},
+		{
+			"name": "Logout",
+			"item": [
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "23a1c8e6-5d3a-4bff-9c99-c8ab5f976ff7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"id": "72f1d12d-ed44-4070-8772-f10d098c3a6c"
 		}
 	],
 	"event": [
