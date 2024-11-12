@@ -702,6 +702,18 @@
 						"url": "{{baseUrl}}{{deleteByClassPathParam}}{{classID}}"
 					},
 					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "65026381-287d-4893-902a-39ab3a7ab8d1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			],
 			"id": "68dc62cd-6625-4b10-b8f5-c53609071ad3"
