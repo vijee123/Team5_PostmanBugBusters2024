@@ -720,6 +720,64 @@
 			"name": "Delete and Data Cleanup",
 			"item": [
 				{
+					"name": "Delete Program By ProgramID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"// pm.environment.unset(\"programId\");",
+									"// pm.environment.unset(\"programName\");",
+									"// Get the status code of the response",
+									"//var StatusCode = pm.response.code;",
+									"",
+									"//calling common methods",
+									"// if (pm.response.text() === '') {",
+									"//     console.log(\"Empty response received.\");",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// if(StatusCode === 200 && pm.response.text() !== ''){",
+									"//     pm.test(\"Validating Status Code\", ()=> {",
+									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
+									"// });",
+									"// }else{",
+									"// var jsonData = pm.response.json();",
+									"// console.log(jsonData);",
+									"// eval(pm.environment.get(\"commonTests\"))();",
+									"// }",
+									"// }",
+									"// pm.collectionVariables.set(\"programId1\",null);",
+									"// pm.collectionVariables.set(\"programName1\",null);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "5f8b8c64-dd75-4882-8148-a34427f432b0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
 					"name": "Delete Program By ProgramName",
 					"event": [
 						{
@@ -763,64 +821,6 @@
 						}
 					],
 					"id": "dbd7099e-eb29-4bfe-b908-eca017c41de6",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Program By ProgramID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
-								"exec": [
-									"// pm.environment.unset(\"programId\");",
-									"// pm.environment.unset(\"programName\");",
-									"// Get the status code of the response",
-									"//var StatusCode = pm.response.code;",
-									"",
-									"//calling common methods",
-									"// if (pm.response.text() === '') {",
-									"//     console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// if(StatusCode === 200 && pm.response.text() !== ''){",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// var jsonData = pm.response.json();",
-									"// console.log(jsonData);",
-									"// eval(pm.environment.get(\"commonTests\"))();",
-									"// }",
-									"// }",
-									"// pm.collectionVariables.set(\"programId1\",null);",
-									"// pm.collectionVariables.set(\"programName1\",null);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "5f8b8c64-dd75-4882-8148-a34427f432b0",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -885,6 +885,329 @@
 				}
 			],
 			"id": "72f1d12d-ed44-4070-8772-f10d098c3a6c"
+		},
+		{
+			"name": "User Role Module",
+			"item": [
+				{
+					"name": "Delete All Programs Batches assigned to the User By UserId",
+					"id": "d4f61b86-088a-4b5a-846e-9a904c200e88",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Program/Batch(es) invalidMethod",
+					"id": "1d088952-48a8-4803-b28e-fccaca079ab2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users invalid Method",
+					"id": "aae619a9-74d7-491e-b428-359ce365823c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{baseUrl}}userRoleProgramBatchMap"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Program/Batch(es) of UserId by invalid Method",
+					"id": "48549e19-5545-4437-8dc7-c5ba7292a650",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Assigned Program/Batch(es) of All Users",
+					"id": "c042e4c8-fa7a-4dad-9972-cd4badf8d9b6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Assigned Program/Batch of a User By User Id",
+					"id": "00e79f58-66ee-40b5-9a65-a727af903db7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"id": "63b2a3ed-675b-459b-9783-373f3b6e27d5"
+		},
+		{
+			"name": "All Users invalid Bearer Token",
+			"id": "ad0dd89f-c0f7-47cb-90c5-de435533043e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTZGV0QGdtYWlsLmNvbSIsImlhdCI6MTczMTM2MTU5OSwiZXhwIjoxNzMxMzkwMzk5fQ.B4Upav43LQLC1Z9zFPlRjDVTfrN3lEZwFQEJR0B1lsFSZNZpSWK7jZJwQYBXhnnAPeegQkxKS8lTbcCbqnyq"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/UserId_NoAuth",
+			"id": "1d0cfe78-cab1-49b7-b132-5039c3c5adc1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/U07"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/Non existing UserId",
+			"id": "15d48883-1474-4144-9152-0cfdea20281b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTZGV0QGdtYWlsLmNvbSIsImlhdCI6MTczMTM2Njk5OCwiZXhwIjoxNzMxMzk1Nzk4fQ._-AVsH7tGnEPJkgDwuYuWXoyPGK86y7wG7jm2Y6plWWNNxYEfMILGi9wM76l9513e3enH_Ua2LqDOQrhAE7h7Q"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/U64"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/splchr_UserId",
+			"id": "24cf6418-efa1-4c72-9806-d95d719fb8a2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/U#01"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/delete_splchr",
+			"id": "c9bdcfac-8dff-4fc3-b1d2-88842e9cd3c9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/deleteAll/U&07"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/delete_alreadydeleted UserID",
+			"id": "3914c27b-ee71-46c5-95cb-56e98a73dc77",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/deleteAll/U07"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/delete_InvalidEndpoint",
+			"id": "9a235aa5-8d21-4da7-af93-b7688de58a06",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/deleteAl/U07"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/delete_noAuth",
+			"id": "6338fb01-240e-4bb5-8e96-33bf47f3ff91",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/deleteAll/U61"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/delete_nonUserId",
+			"id": "0763f6d0-879c-4287-9a1f-97360d205814",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/deleteAll/U04"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/delete_noUserId",
+			"id": "8d207373-d8f6-4868-8642-5f6d6e619ef9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/deleteAll/Null"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/delete_InvalidbaseURL",
+			"id": "763f13be-d383-486c-bcff-75ab051e6f4a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "https://lms-hackthon-oct24-3efc7e0df381.herokuapp.com/lm/userRoleProgramBatchMap/deleteAll/U07"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/delete_invalidBaseURL",
+			"id": "91d4d8c0-a537-4e7d-aff2-67f2245c83f6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "https://lms-hackthon-oct24-3efc7e0df381.herokuapp.com/lsm/userRoleProgramBatchMap/deleteAll/U07"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/Null UserId",
+			"id": "0b3bf50e-58ea-43e9-94a3-4ae0086450bd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/Null"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/Null UserId2",
+			"id": "394674df-0df5-41ff-9de6-9d0f5f4edd50",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}userRoleProgramBatchMap/"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/UserId/invalidURL",
+			"id": "d1c8d417-c4b4-450d-bd8a-aa1b74364cea",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://lms-hackthon-oct24-3efc7e0df381.herokuapp.co/lms/userRoleProgramBatchMap/U07"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/UserId/invalid_endpoint",
+			"id": "127ceb4d-855a-40af-950f-77865a4b1820",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://lms-hackthon-oct24-3efc7e0df381.herokuapp.com/lms/userRoleProgramBatchMaps/U07"
+			},
+			"response": []
+		},
+		{
+			"name": "Program/Batch(es)/UserId/invalidURL2",
+			"id": "e9c70f25-50df-472d-b381-65e60647629d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://lms-hackthon-oct24-3efc7e0df381.herokuapp.co/userRoleProgramBatchMap/U07"
+			},
+			"response": []
 		}
 	],
 	"event": [
