@@ -704,7 +704,24 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Create New Class",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2553e694-aa73-40bd-82c7-42ded575d949",
+								"exec": [
+									"//--------- Set the Content Type Header-----------\r",
+									"pm.request.headers.add({\r",
+									"    key: \"Content-Type\",\r",
+									"    value: pm.variables.get(\"contentType\")\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"id": "65026381-287d-4893-902a-39ab3a7ab8d1",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -714,7 +731,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"batchId\": {{batchId}},\r\n  \"classComments\": \"{{classComments}}\",\r\n  \"classDate\": \"{{classDate}}\",\r\n  \"classDescription\": \"bug class\",\r\n  \"classNo\": 1,\r\n  \"classNotes\": \"bug buster notes\",\r\n  \"classRecordingPath\": \"D://Downloads\",\r\n  \"classStaffId\": \"U26\",\r\n  \"classTopic\": \"java bug busters new\",\r\n   \"classScheduledDates\": [\r\n    \"2024-11-20T15:11:08.750Z\"\r\n    ]\r\n}",
+							"raw": "{\r\n  \"batchId\": {{batchId}},\r\n  \"classComments\": \"{{classComments}}\",\r\n  \"classDate\": \"{{classDate}}\",\r\n  \"classDescription\": \"{{classDescription}}\",\r\n  \"classNo\": {{classNo}},\r\n  \"classNotes\": \"{{classNotes}}\",\r\n  \"classRecordingPath\": \"{{classRecordingPath}}\",\r\n  \"classStaffId\": \"{{classStaffId}}\",\r\n  \"classTopic\": \"{{classTopic}}\",\r\n\"classScheduledDates\": \"{{classSCheduledDates}}\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
