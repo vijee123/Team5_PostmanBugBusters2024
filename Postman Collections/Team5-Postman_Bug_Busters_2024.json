@@ -912,32 +912,6 @@
 					"response": []
 				},
 				{
-					"name": "Get All Users invalid Method",
-					"id": "aae619a9-74d7-491e-b428-359ce365823c",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": "{{baseUrl}}userRoleProgramBatchMap"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Program/Batch(es) of UserId by invalid Method",
-					"id": "48549e19-5545-4437-8dc7-c5ba7292a650",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
 					"name": "Get Assigned Program/Batch(es) of All Users",
 					"id": "c042e4c8-fa7a-4dad-9972-cd4badf8d9b6",
 					"protocolProfileBehavior": {
