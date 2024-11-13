@@ -3835,14 +3835,6 @@
 			"key": "deleteByClassPathParam",
 			"value": "deleteByClass/",
 			"type": "string"
-		},
-		{
-			"key": "classID",
-			"value": ""
-		},
-		{
-			"key": "classTopic",
-			"value": ""
 		}
 	]
 }
