@@ -3366,123 +3366,30 @@
 					"response": []
 				},
 				{
-					"name": "Delete Program By ProgramID",
+					"name": "Delete Class By Class Id",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"id": "ded100b2-204b-477c-9e41-e3b8553fbe69",
 								"exec": [
-									"// pm.environment.unset(\"programId\");",
-									"// pm.environment.unset(\"programName\");",
-									"// Get the status code of the response",
-									"//var StatusCode = pm.response.code;",
-									"",
-									"//calling common methods",
-									"// if (pm.response.text() === '') {",
-									"//     console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// if(StatusCode === 200 && pm.response.text() !== ''){",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// var jsonData = pm.response.json();",
-									"// console.log(jsonData);",
-									"// eval(pm.environment.get(\"commonTests\"))();",
-									"// }",
-									"// }",
-									"// pm.collectionVariables.set(\"programId1\",null);",
-									"// pm.collectionVariables.set(\"programName1\",null);"
+									"pm.collectionVariables.unset('classID');\r",
+									"pm.collectionVariables.unset('classTopic');\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
 							}
 						}
 					],
-					"id": "5f8b8c64-dd75-4882-8148-a34427f432b0",
+					"id": "118cdde0-2d61-4a84-9132-4f80e8a4c26d",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{baseUrl}}{{Endpoint}}"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Program By ProgramName",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
-								"exec": [
-									"// pm.environment.unset(\"programId2\");",
-									"// pm.environment.unset(\"programName2\");",
-									"",
-									"// const jsonData = pm.response.json();",
-									"// console.log(jsonData);",
-									"",
-									"// Get the status code of the response",
-									"// var StatusCode = pm.response.code;",
-									"",
-									"",
-									"// //calling common methods",
-									"// if (pm.response.text() === '') {",
-									"//     console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// if(StatusCode === 200){",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
-									"// }else{",
-									"// var jsonData = pm.response.json();",
-									"// console.log(jsonData);",
-									"// eval(pm.environment.get(\"commonTests\"))();",
-									"// }",
-									"// }",
-									"// pm.collectionVariables.set(\"programId2\",null);",
-									"// pm.collectionVariables.set(\"programName2\",null);"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"id": "dbd7099e-eb29-4bfe-b908-eca017c41de6",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{baseUrl}}{{Endpoint}}"
+						"url": "{{baseUrl}}{{deleteByClassPathParam}}{{classID}}"
 					},
 					"response": []
 				},
@@ -3561,30 +3468,79 @@
 					"response": []
 				},
 				{
-					"name": "Delete Class By Class Id",
+					"name": "Delete Program By ProgramID",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "ded100b2-204b-477c-9e41-e3b8553fbe69",
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
 								"exec": [
-									"pm.collectionVariables.unset('classID');\r",
-									"pm.collectionVariables.unset('classTopic');\r",
-									""
+									"// pm.environment.unset(\"programId\");",
+									"// pm.environment.unset(\"programName\");",
+									"// pm.collectionVariables.set(\"programId1\",null);",
+									"// pm.collectionVariables.set(\"programName1\",null);"
 								],
 								"type": "text/javascript",
 								"packages": {}
 							}
 						}
 					],
-					"id": "118cdde0-2d61-4a84-9132-4f80e8a4c26d",
+					"id": "5f8b8c64-dd75-4882-8148-a34427f432b0",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{baseUrl}}{{deleteByClassPathParam}}{{classID}}"
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Program By ProgramName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
+								"exec": [
+									"// pm.environment.unset(\"programId2\");",
+									"// pm.environment.unset(\"programName2\");",
+									"",
+									"// pm.collectionVariables.set(\"programId2\",null);",
+									"// pm.collectionVariables.set(\"programName2\",null);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "dbd7099e-eb29-4bfe-b908-eca017c41de6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
 					},
 					"response": []
 				}
