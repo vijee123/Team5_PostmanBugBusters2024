@@ -1669,7 +1669,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"batchId\": {{batchId}},\r\n    \"batchName\": \"{{batchName}}\",\r\n    \"batchDescription\": \"{{batchDescription}}\",\r\n    \"batchStatus\": \"{{batchStatus}}\",\r\n    \"batchNoOfClasses\": {{batchNoOfClasses}},\r\n    \"programId\": {{programId1}},\r\n    \"programName\": \"{{programName1}}\"\r\n}",
+							"raw": "{\r\n    \"batchId\": {{batchId2}},\r\n    \"batchName\": \"{{batchName}}\",\r\n    \"batchDescription\": \"{{batchDescription}}\",\r\n    \"batchStatus\": \"{{batchStatus}}\",\r\n    \"batchNoOfClasses\": {{batchNoOfClasses}},\r\n    \"programId\": {{programId1}},\r\n    \"programName\": \"{{programName1}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
