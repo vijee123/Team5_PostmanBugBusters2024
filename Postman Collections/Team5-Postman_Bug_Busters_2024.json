@@ -2975,6 +2975,57 @@
 						"url": "{{baseUrl}}{{getClassesByStaffID}}{{validStaffID}}"
 					},
 					"response": []
+				},
+				{
+					"name": "Get Class details by Id",
+					"id": "78fc738e-154c-49a5-9de0-e0d9fe784e68",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Classes by Class topic",
+					"id": "1c910028-8fa1-46b4-9413-9da43d39f8d9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all recordings",
+					"id": "320266bd-862d-4aab-afc2-2e3446cfc4f9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{Endpoint}}",
+							"host": [
+								"{{baseUrl}}{{Endpoint}}"
+							],
+							"query": [
+								{
+									"key": "csId",
+									"value": "38",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "68dc62cd-6625-4b10-b8f5-c53609071ad3"
@@ -3280,6 +3331,299 @@
 				}
 			],
 			"id": "72f1d12d-ed44-4070-8772-f10d098c3a6c"
+		},
+		{
+			"name": "Class Module 2",
+			"item": [
+				{
+					"name": "Get Class Recordings by Class Id",
+					"id": "417f69a5-81c5-4757-a8f4-64bea7d922af",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Class Recordings by Class Id_2",
+					"id": "8d513632-47a2-40de-aed1-e8004edacbfa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Upcoming Classes for particular Student",
+					"id": "04038a7d-a261-488b-8a5d-5a6364d66765",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateClassRecordings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a12555e1-05af-4ffd-93db-225394ed9a59",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"// //-------------SCHEMA VALIDATION---------------",
+									" var expectedSchema = {",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"classRecordingPath\": {",
+									"      \"type\": [\"string\",\"null\"]",
+									"    },",
+									"     \"csId\": {",
+									"      \"type\": [\"integer\",\"null\"]",
+									"    },",
+									"  },",
+									"  \"required\": [",
+									"  ]",
+									"}",
+									"",
+									"",
+									"if(pm.variables.get(\"_comment\")===\"valid\")",
+									"{ ",
+									"   //-----------SCHEMA VALIDATION----------------",
+									"   pm.test(\"Verify JSON Schema\", function () {",
+									"        pm.response.to.have.jsonSchema(expectedSchema);",
+									"    });",
+									"",
+									"   //------------DATA TYPE VALIDATION----------------",
+									"   pm.test(\"Data Type Validation\",()=>{",
+									"        // Validate classRecordingPath",
+									"        pm.expect(typeof jsonData.classRecordingPath).to.eql(\"string\" || \"null\", \"Expected 'classRecordingPath' to be a string\");",
+									"    ",
+									"        // Validate classId",
+									"        pm.expect(typeof jsonData.csId).to.eql(\"number\" || \"null\", \"Expected 'csId' to be a number\");",
+									"            });",
+									"",
+									" }",
+									" ",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "99822ab6-7abf-416a-8d22-5028b5ba7129",
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "585ea831-a3f3-4eee-ba2c-508ac657e5bb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classRecordingPath\": \"{{recordingPath}}\",\r\n    \"csId\": 0\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateClass",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a12555e1-05af-4ffd-93db-225394ed9a59",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"// //-------------SCHEMA VALIDATION---------------",
+									" var expectedSchema = {",
+									"  \"type\": \"object\",",
+									"  \"properties\": {",
+									"    \"batchId\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"classComments\": {",
+									"      \"type\": [\"string\",\"null\"]",
+									"    },",
+									"    \"classDate\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"classDescription\": {",
+									"      \"type\": [\"string\",\"null\"]",
+									"    },",
+									"    \"classNo\": {",
+									"      \"type\": \"integer\"",
+									"    },",
+									"    \"classStatus\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"classNotes\": {",
+									"      \"type\": [\"string\",\"null\"]",
+									"    },",
+									"    \"classRecordingPath\": {",
+									"      \"type\": [\"string\",\"null\"]",
+									"    },",
+									"    \"classStaffId\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"classTopic\": {",
+									"      \"type\": \"string\"",
+									"    },",
+									"    \"classScheduledDates\": {",
+									"      \"type\": [\"array\",\"null\"],",
+									"      \"items\": [",
+									"        {",
+									"          \"type\": \"string\"",
+									"        },",
+									"        {",
+									"          \"type\": \"string\"",
+									"        }",
+									"      ]",
+									"    }",
+									"  },",
+									"  \"required\": [",
+									"    \"batchId\",",
+									"    \"classDate\",",
+									"    \"classNo\",",
+									"    \"classStatus\",",
+									"    \"classStaffId\",",
+									"    \"classTopic\"",
+									"  ]",
+									"}",
+									"",
+									"",
+									"if(pm.variables.get(\"_comment\")===\"valid all\")",
+									"{ ",
+									"   //-----------SCHEMA VALIDATION----------------",
+									"   pm.test(\"Verify JSON Schema\", function () {",
+									"        pm.response.to.have.jsonSchema(expectedSchema);",
+									"    });",
+									"",
+									"   //------------DATA TYPE VALIDATION----------------",
+									"   pm.test(\"Data Type Validation\",()=>{",
+									"       ",
+									"        // Validate batchId",
+									"        pm.expect(typeof jsonData.batchId).to.eql(\"number\", \"Expected 'batchId' to be a number\");",
+									"",
+									"        // Validate classId",
+									"        pm.expect(typeof jsonData.csId).to.eql(\"number\", \"Expected 'csId' to be a number\");",
+									"",
+									"        // Validate classComments",
+									"        pm.expect(typeof jsonData.classComments).to.eql(\"string\" || \"null\", \"Expected 'classComments' to be a string\");",
+									"    ",
+									"        // Validate classDate",
+									"        pm.expect(typeof jsonData.classDate).to.eql(\"string\", \"Expected 'classDate' to be a string\");",
+									"    ",
+									"        // Validate classDescription",
+									"        pm.expect(typeof jsonData.classDescription).to.eql(\"string\" || \"null\", \"Expected 'classDescription' to be a string\");",
+									"    ",
+									"        // Validate classNotes",
+									"        pm.expect(typeof jsonData.classNotes).to.eql(\"string\" || \"null\", \"Expected 'classNotes' to be a string\");",
+									"    ",
+									"        // Validate classRecordingPath ",
+									"        pm.expect(typeof jsonData.classRecordingPath).to.eql(\"string\" || \"null\", \"Expected 'classRecordingPath' to be a string\");",
+									"    ",
+									"        // Validate classStaffId ",
+									"        pm.expect(typeof jsonData.classStaffId).to.eql(\"string\", \"Expected 'classStaffId' to be a string\");",
+									"    ",
+									"        // Validate classTopic",
+									"        pm.expect(typeof jsonData.classTopic).to.eql(\"string\", \"Expected 'classTopic' to be a string\");",
+									"   ",
+									"        // Validate classStatus",
+									"        pm.expect(typeof jsonData.classStatus).to.eql(\"string\", \"Expected 'classStatus' to be a string\");",
+									"   ",
+									"        // Validate classScheduledDates",
+									"        pm.expect(typeof jsonData.classScheduledDates).to.eql(\"object\" || \"null\", \"Expected 'classScheduledDates' to be a object\");",
+									"        ",
+									"            });",
+									"",
+									" }",
+									"",
+									"",
+									"if (pm.variables.get(\"_comment\")===\"batch name update\") {",
+									"   pm.test(\"Validate batch name value response\", () => {",
+									"       pm.expect(pm.response.code).to.eql(200);",
+									"       pm.expect(pm.response.status).to.eql(\"OK\");",
+									"        pm.expect(jsonData.batchName).to.be.equal(pm.variables.batchName);",
+									"   });",
+									"}",
+									" "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "16decf17-628d-47f8-82db-fbb302f660d3",
+								"exec": [
+									"pm.variables.set(\"classScheduledDates\", JSON.stringify(pm.variables.get(\"classScheduledDates\")));",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "63d39cac-99f5-465f-90ef-b2ed519d666c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"batchId\": \"{{batch_Id}}\",\n  \"classNo\": {{classCount}},\n  \"classDate\": \"{{class_date}}\",\n   \"classTopic\": \"{{class_topic}}\",\n   \"batchName\": \"{{batchName}}\",\n\"classStaffId\": \"{{class_staffId}}\",\n\"classStatus\":\"{{classStatus}}\",\n  \"classDescription\": \"{{class_desc}}\",\n   \"classComments\": \"{{class_comments}}\",\n  \"classNotes\": \"{{class_notes}}\",\n  \"classRecordingPath\": \"{{class_recording}}\",\n   \"classScheduledDates\": {{classScheduledDates}}\n    \n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}{{Endpoint}}"
+					},
+					"response": []
+				}
+			],
+			"id": "451ff37a-4c70-4e84-9662-37ea9a8712e4"
 		}
 	],
 	"event": [
