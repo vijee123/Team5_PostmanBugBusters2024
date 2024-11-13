@@ -3595,7 +3595,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "caf52849-d4e6-4553-a337-21f24319fd84",
+				"id": "924381ec-550d-492b-b4b3-9e9260ef2eff",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3660,7 +3660,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "aed75a27-d8c4-482d-a3c1-2f167f8b269e",
+				"id": "6202f702-3158-43c6-94b0-551e641ebe57",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3789,11 +3789,6 @@
 			"type": "string"
 		},
 		{
-			"key": "EndPoint",
-			"value": "CreateClassSchedule",
-			"type": "string"
-		},
-		{
 			"key": "batchName1",
 			"value": "",
 			"type": "string"
@@ -3810,6 +3805,11 @@
 		{
 			"key": "BatchName2",
 			"value": ""
+		},
+		{
+			"key": "EndPoint",
+			"value": "CreateClassSchedule",
+			"type": "string"
 		},
 		{
 			"key": "getAllClassListEndpoint",
@@ -3834,16 +3834,6 @@
 		{
 			"key": "deleteByClassPathParam",
 			"value": "deleteByClass/",
-			"type": "string"
-		},
-		{
-			"key": "classID",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "classTopic",
-			"value": "",
 			"type": "string"
 		}
 	]
