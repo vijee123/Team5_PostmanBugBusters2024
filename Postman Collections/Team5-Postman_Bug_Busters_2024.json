@@ -910,8 +910,8 @@
 									"\r",
 									"\r",
 									"    const jsonData = pm.response.json();\r",
-									"    pm.collectionVariables.set(\"batchId\", jsonData.batchId);  \r",
-									"    pm.collectionVariables.set(\"batchName\", jsonData.batchName);\r",
+									"    pm.collectionVariables.set(\"batchId1\", jsonData.batchId);  \r",
+									"    pm.collectionVariables.set(\"batchName1\", jsonData.batchName);\r",
 									"}\r",
 									""
 								],
@@ -3291,7 +3291,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "aeb3c1e8-444f-4925-8557-35303d53ae8c",
+				"id": "baa036b7-beef-40b4-92bf-3ddd0d312999",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3356,7 +3356,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "bf960003-732e-45be-95cb-d7d270a57e97",
+				"id": "bcb29584-aa95-4ae2-81b2-7b4eb769c442",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3518,12 +3518,12 @@
 			"type": "string"
 		},
 		{
-			"key": "batchId",
+			"key": "batchId1",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"key": "batchName",
+			"key": "batchName1",
 			"value": "",
 			"type": "string"
 		},
