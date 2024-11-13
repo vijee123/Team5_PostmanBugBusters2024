@@ -3595,7 +3595,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "a338e836-399f-4be9-958e-c07e21c022f7",
+				"id": "caf52849-d4e6-4553-a337-21f24319fd84",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3660,7 +3660,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "fcb9dd32-11f8-4ab3-bbd2-84b51ea63a07",
+				"id": "aed75a27-d8c4-482d-a3c1-2f167f8b269e",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3834,6 +3834,16 @@
 		{
 			"key": "deleteByClassPathParam",
 			"value": "deleteByClass/",
+			"type": "string"
+		},
+		{
+			"key": "classID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "classTopic",
+			"value": "",
 			"type": "string"
 		}
 	]
