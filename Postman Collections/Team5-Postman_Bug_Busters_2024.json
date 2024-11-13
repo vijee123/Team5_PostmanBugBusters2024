@@ -3639,7 +3639,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "3bbbe865-6c59-4c71-839b-4962f76dd9c5",
+				"id": "9ba2a652-b01f-46f2-8071-751fdd093d98",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3704,7 +3704,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "2eb5377a-e96f-47a4-b5ce-ab25b91ca4ba",
+				"id": "9b69df91-251d-4c18-89fe-8f0fcdb6ee81",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3833,9 +3833,37 @@
 			"type": "string"
 		},
 		{
+			"key": "batchId1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "batchId2",
+			"value": "",
+			"type": "string"
+		},
+		{
 			"key": "EndPoint",
 			"value": "CreateClassSchedule",
 			"type": "string"
+		},
+		{
+			"key": "batchName1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "batchName2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BatchName",
+			"value": ""
+		},
+		{
+			"key": "BatchName2",
+			"value": ""
 		},
 		{
 			"key": "getAllClassListEndpoint",
@@ -3861,34 +3889,6 @@
 			"key": "deleteByClassPathParam",
 			"value": "deleteByClass/",
 			"type": "string"
-		},
-		{
-			"key": "batchId1",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "batchName1",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "batchId2",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "batchName2",
-			"value": "",
-			"type": "string"
-		},
-		{
-			"key": "BatchName",
-			"value": ""
-		},
-		{
-			"key": "BatchName2",
-			"value": ""
 		}
 	]
 }
