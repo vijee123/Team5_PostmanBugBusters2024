@@ -3813,11 +3813,6 @@
 			"type": "string"
 		},
 		{
-			"key": "classID",
-			"value": "901",
-			"type": "string"
-		},
-		{
 			"key": "activeBatchId",
 			"value": "9095",
 			"type": "string"
@@ -3825,11 +3820,6 @@
 		{
 			"key": "InactiveBatchId",
 			"value": "8694",
-			"type": "string"
-		},
-		{
-			"key": "classTopic",
-			"value": "PostmanBugBusters-ClassTopicHaylee",
 			"type": "string"
 		},
 		{
