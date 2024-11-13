@@ -871,8 +871,9 @@
 							"script": {
 								"id": "a12555e1-05af-4ffd-93db-225394ed9a59",
 								"exec": [
-									"\r",
-									"\r",
+									"var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"batchId2\", jsonData.batchId);\r",
+									"    pm.collectionVariables.set(\"batchName2\", jsonData.batchName);\r",
 									"\r",
 									"\r",
 									"\r",
@@ -906,6 +907,7 @@
 									"    pm.test(\"Response schema is valid\", function () {\r",
 									"        pm.expect(pm.response.json()).to.have.jsonSchema(batchSchema);\r",
 									"    });\r",
+									"\r",
 									"\r",
 									"    const jsonData = pm.response.json();\r",
 									"    pm.collectionVariables.set(\"batchId\", jsonData.batchId);  \r",
