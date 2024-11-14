@@ -3624,7 +3624,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "924381ec-550d-492b-b4b3-9e9260ef2eff",
+				"id": "ac19aa8c-6953-431d-b420-2c530f5f8db2",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3655,7 +3655,12 @@
 					"if(currentrequest.data.length > 0){",
 					"    pm.execution.setNextRequest(pm.info.requestName)",
 					"}",
-					" ",
+					"",
+					"//  pm.variables.set('requestdata',requestdata);",
+					"// if(currentrequest.data.length > 0){",
+					"//     postman.setNextRequest(pm.info.requestName)",
+					"// }",
+					"",
 					"//------------------ Authorization Set Up-----------------",
 					"pm.request.headers.clear(); // Clear all headers to prevent residual values",
 					"var AuthType = pm.variables.get(\"authType\");",
@@ -3689,7 +3694,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "6202f702-3158-43c6-94b0-551e641ebe57",
+				"id": "447e904a-8b43-4f19-a9f2-c6f9adc6fcac",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
