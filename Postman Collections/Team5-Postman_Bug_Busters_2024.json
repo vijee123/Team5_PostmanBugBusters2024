@@ -382,8 +382,7 @@
 							"script": {
 								"id": "039e0266-6c3c-4517-a505-945c27ea36dd",
 								"exec": [
-									"// const jsonData = pm.response.json();",
-									"// console.log(jsonData);"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -392,8 +391,12 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"packages": {},
-								"type": "text/javascript"
+								"id": "8f5e54b1-2272-4232-811a-7298734e35ca",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -418,9 +421,6 @@
 								"exec": [
 									"if (pm.response.text() === '') {",
 									"    console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
 									"}else{",
 									"var jsonData = pm.response.json();",
 									"console.log(jsonData);",
@@ -482,8 +482,6 @@
 									"        pm.expect(jsonData.programStatus).to.equal(pm.variables.get(\"programStatus\"));",
 									"    });",
 									"",
-									"// //pm.collectionVariables.set(\"programId\",jsonData.programId);",
-									"// pm.collectionVariables.set(\"programName1\",jsonData.programName);",
 									" }",
 									"}"
 								],
@@ -537,9 +535,6 @@
 								"exec": [
 									"if (pm.response.text() === '') {",
 									"    console.log(\"Empty response received.\");",
-									"//     pm.test(\"Validating Status Code\", ()=> {",
-									"//     pm.expect(pm.response.code).to.eql(pm.variables.get(\"statusCode\"));",
-									"// });",
 									"}else{",
 									"var jsonData = pm.response.json();",
 									"console.log(jsonData);",
@@ -600,8 +595,6 @@
 									"        pm.expect(jsonData.programStatus).to.equal(pm.variables.get(\"programStatus\"));",
 									"    });",
 									"",
-									"// //pm.collectionVariables.set(\"programId\",jsonData.programId);",
-									"// pm.collectionVariables.set(\"programName\",jsonData.programName);",
 									"}}"
 								],
 								"type": "text/javascript",
