@@ -16,9 +16,14 @@
 							"script": {
 								"id": "6de74170-eb9e-4c6a-8cfe-94d26e476ff6",
 								"exec": [
-									"var jsonData = pm.response.json();",
-									"pm.environment.set(\"AuthToken\",jsonData.token);",
+									"// var jsonData = pm.response.json();",
+									"// pm.environment.set(\"AuthToken\",jsonData.token);",
 									"",
+									"if(pm.variables.get(\"statusCode\"===200)){",
+									"    let jsonData = pm.response.json(); ",
+									"    ",
+									"    pm.environment.set(\"AuthToken\",jsonData.token);",
+									"}",
 									""
 								],
 								"type": "text/javascript",
@@ -102,8 +107,14 @@
 							"script": {
 								"id": "1a5fd139-b9ac-4ee4-94f5-ea0b4eb51eb7",
 								"exec": [
-									"var jsonData = pm.response.json();",
-									"console.log(jsonData);",
+									"// var jsonData = pm.response.json();",
+									"// console.log(jsonData);",
+									"",
+									"if (pm.response.text() === '') {",
+									"    console.log(\"Empty response received.\");",
+									"}else { var jsonData = pm.response.json();",
+									"//console.log(jsonData);",
+									"}",
 									"",
 									"const expectedSchema = {",
 									"  \"type\": \"object\",",
