@@ -3467,10 +3467,7 @@
 							"script": {
 								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
 								"exec": [
-									"// pm.environment.unset(\"programId\");",
-									"// pm.environment.unset(\"programName\");",
-									"// pm.collectionVariables.set(\"programId1\",null);",
-									"// pm.collectionVariables.set(\"programName1\",null);"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3505,11 +3502,7 @@
 							"script": {
 								"id": "8b853394-9555-4c81-8580-8bb14bc44c53",
 								"exec": [
-									"// pm.environment.unset(\"programId2\");",
-									"// pm.environment.unset(\"programName2\");",
-									"",
-									"// pm.collectionVariables.set(\"programId2\",null);",
-									"// pm.collectionVariables.set(\"programName2\",null);"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
