@@ -2780,39 +2780,13 @@
 					"name": "Create New Class",
 					"event": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"id": "2553e694-aa73-40bd-82c7-42ded575d949",
-								"exec": [
-									"//--------- Set the Content Type Header-----------\r",
-									"pm.request.headers.add({\r",
-									"    key: \"Content-Type\",\r",
-									"    value: pm.variables.get(\"contentType\")\r",
-									"});\r",
-									"\r",
-									"pm.variables.set(\"classScheduledDates\", JSON.stringify(pm.variables.get(\"classScheduledDates\")));\r",
-									"\r",
-									"var Topic = null; \r",
-									"if(pm.variables.get(\"statusCode\") === 201){\r",
-									"     Topic = \"PostmanBugBusters-ClassTopic\" + pm.variables.replaceIn('{{$randomFirstName}}');\r",
-									"     pm.collectionVariables.set(\"Topic\", Topic);\r",
-									"     \r",
-									" }else{\r",
-									"    Topic = pm.variables.get(\"classTopic\");\r",
-									"    pm.collectionVariables.set(\"Topic\", Topic);\r",
-									"    }\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
 							"listen": "test",
 							"script": {
-								"id": "13e3e252-a532-40c0-afde-0b9dfa4474fc",
+								"id": "b6870050-a029-4260-a90f-b29da0d8a2cd",
 								"exec": [
-									"let jsonData = pm.response.json();\r",
+									"if(pm.variables.get(\"statusCode\"===201)){\r",
+									"    let jsonData = pm.response.json(); }\r",
+									"\r",
 									"pm.collectionVariables.unset(\"Topic\");\r",
 									"\r",
 									"// //-------------SCHEMA VALIDATION---------------\r",
@@ -2863,16 +2837,22 @@
 									"  },\r",
 									"  \"required\": [\r",
 									"    \"batchId\",\r",
+									"    \"classComments\",\r",
 									"    \"classDate\",\r",
+									"    \"classDescription\",\r",
 									"    \"classNo\",\r",
 									"    \"classStatus\",\r",
+									"    \"classNotes\",\r",
+									"    \"classRecordingPath\",\r",
 									"    \"classStaffId\",\r",
-									"    \"classTopic\"\r",
+									"    \"classTopic\",\r",
+									"    \"classScheduledDates\"\r",
 									"  ]\r",
 									"}\r",
 									"\r",
 									"if(pm.variables.get(\"classComments\")===\"Create Class With All Valid details\")\r",
 									"{ \r",
+									"    let jsonData = pm.response.json();\r",
 									"   //-----------COLLECTION VARIABLE SET UP---------\r",
 									"   pm.collectionVariables.set('classID',jsonData.csId);\r",
 									"   pm.collectionVariables.set('classTopic',jsonData.classTopic);\r",
@@ -2924,6 +2904,34 @@
 									"\r",
 									" \r",
 									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f643efc6-d4bf-4e19-9128-43704d51e22d",
+								"exec": [
+									"//--------- Set the Content Type Header-----------\r",
+									"pm.request.headers.add({\r",
+									"    key: \"Content-Type\",\r",
+									"    value: pm.variables.get(\"contentType\")\r",
+									"});\r",
+									"\r",
+									"pm.variables.set(\"classScheduledDates\", JSON.stringify(pm.variables.get(\"classScheduledDates\")));\r",
+									"\r",
+									"var Topic = null; \r",
+									"if(pm.variables.get(\"statusCode\") === 201){\r",
+									"     Topic = \"PostmanBugBusters-ClassTopic\" + pm.variables.replaceIn('{{$randomFirstName}}');\r",
+									"     pm.collectionVariables.set(\"Topic\", Topic);\r",
+									"     \r",
+									" }else{\r",
+									"    Topic = pm.variables.get(\"classTopic\");\r",
+									"    pm.collectionVariables.set(\"Topic\", Topic);\r",
+									"    }\r",
 									""
 								],
 								"type": "text/javascript",
