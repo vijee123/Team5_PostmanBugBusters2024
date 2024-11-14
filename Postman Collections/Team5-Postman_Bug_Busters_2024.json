@@ -421,13 +421,14 @@
 							"script": {
 								"id": "00f9d2db-3699-4aa1-9667-02d42c35872c",
 								"exec": [
-									"if (pm.response.text() === '') {",
-									"    console.log(\"Empty response received.\");",
-									"}else{",
-									"var jsonData = pm.response.json();",
-									"console.log(jsonData);",
+									"// if (pm.response.text() === '') {",
+									"//     console.log(\"Empty response received.\");",
+									"// }else{",
+									"// var jsonData = pm.response.json();",
+									"// console.log(jsonData);",
 									"",
-									"",
+									"if(pm.variables.get(\"statusCode\")===200){",
+									"    var jsonData = pm.response.json();",
 									"// Get the status code of the response",
 									"var StatusCode = pm.response.code;",
 									"",
@@ -535,13 +536,14 @@
 							"script": {
 								"id": "9430f6eb-9183-4933-8c31-2d7ff04b459a",
 								"exec": [
-									"if (pm.response.text() === '') {",
-									"    console.log(\"Empty response received.\");",
-									"}else{",
-									"var jsonData = pm.response.json();",
-									"console.log(jsonData);",
+									"// if (pm.response.text() === '') {",
+									"//     console.log(\"Empty response received.\");",
+									"// }else{",
+									"// var jsonData = pm.response.json();",
+									"// console.log(jsonData);",
 									"",
-									"",
+									"if(pm.variables.get(\"statusCode\")===200){",
+									"    ",
 									"//Get the status code of the response",
 									"var StatusCode = pm.response.code;",
 									"",
@@ -3412,14 +3414,6 @@
 			"key": "deleteByClassPathParam",
 			"value": "deleteByClass/",
 			"type": "string"
-		},
-		{
-			"key": "classID",
-			"value": ""
-		},
-		{
-			"key": "classTopic",
-			"value": ""
 		}
 	]
 }
