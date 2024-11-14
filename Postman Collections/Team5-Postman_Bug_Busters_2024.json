@@ -107,7 +107,7 @@
 									"//     console.log(\"Empty response received.\");",
 									"// }else { var jsonData = pm.response.json();",
 									"// //console.log(jsonData);",
-									"}",
+									"//}",
 									"",
 									"const expectedSchema = {",
 									"  \"type\": \"object\",",
