@@ -2367,7 +2367,9 @@
 							"script": {
 								"id": "b6870050-a029-4260-a90f-b29da0d8a2cd",
 								"exec": [
-									"let jsonData = pm.response.json();\r",
+									"if(pm.variables.get(\"statusCode\")===201){\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
 									"pm.collectionVariables.unset(\"Topic\");\r",
 									"\r",
 									"pm.collectionVariables.unset(\"Topic\");\r",
@@ -2486,8 +2488,7 @@
 									" }\r",
 									"\r",
 									" \r",
-									"\r",
-									""
+									"}"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3410,6 +3411,14 @@
 			"key": "deleteByClassPathParam",
 			"value": "deleteByClass/",
 			"type": "string"
+		},
+		{
+			"key": "classID",
+			"value": ""
+		},
+		{
+			"key": "classTopic",
+			"value": ""
 		}
 	]
 }
