@@ -2768,7 +2768,8 @@
 							"script": {
 								"id": "a12555e1-05af-4ffd-93db-225394ed9a59",
 								"exec": [
-									"let jsonData = pm.response.json();",
+									"if(pm.variables.get(\"statusCode\")===200){",
+									"   let jsonData = pm.response.json();",
 									"",
 									"",
 									" //-------------SCHEMA VALIDATION---------------",
@@ -2883,7 +2884,7 @@
 									"        pm.expect(jsonData.batchName).to.be.equal(pm.variables.batchName);",
 									"   });",
 									"}",
-									" "
+									"}"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3414,6 +3415,14 @@
 			"key": "deleteByClassPathParam",
 			"value": "deleteByClass/",
 			"type": "string"
+		},
+		{
+			"key": "classID",
+			"value": ""
+		},
+		{
+			"key": "classTopic",
+			"value": ""
 		}
 	]
 }
