@@ -16,7 +16,7 @@
 							"script": {
 								"id": "6de74170-eb9e-4c6a-8cfe-94d26e476ff6",
 								"exec": [
-									"// var jsonData = pm.response.json();",
+									"var jsonData = pm.response.json();",
 									"// pm.environment.set(\"AuthToken\",jsonData.token);",
 									"",
 									"if(pm.variables.get(\"statusCode\"===200)){",
