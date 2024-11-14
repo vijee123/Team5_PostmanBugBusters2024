@@ -3096,11 +3096,9 @@
 							"script": {
 								"id": "a12555e1-05af-4ffd-93db-225394ed9a59",
 								"exec": [
-									"if(pm.variables.get(\"statusCode\")===200)",
-									"{let jsonData = pm.response.json();}",
-									"else{let jsonData = pm.response.text();}",
+									"let jsonData = pm.response.json();",
 									"",
-									"// //-------------SCHEMA VALIDATION---------------",
+									"//-------------SCHEMA VALIDATION---------------",
 									" var expectedSchema = {",
 									"  \"type\": \"object\",",
 									"  \"properties\": {",
@@ -3183,14 +3181,10 @@
 							"script": {
 								"id": "a12555e1-05af-4ffd-93db-225394ed9a59",
 								"exec": [
-									"//let jsonData = pm.response.json();",
-									"",
-									"if(pm.variables.get(\"statusCode\")===200)",
-									"{let jsonData = pm.response.json();}",
-									"else{let jsonData = pm.response.text();}",
+									"let jsonData = pm.response.json();",
 									"",
 									"",
-									"// //-------------SCHEMA VALIDATION---------------",
+									" //-------------SCHEMA VALIDATION---------------",
 									" var expectedSchema = {",
 									"  \"type\": \"object\",",
 									"  \"properties\": {",
