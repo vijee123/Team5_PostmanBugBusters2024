@@ -3411,6 +3411,10 @@
 			"key": "deleteByClassPathParam",
 			"value": "deleteByClass/",
 			"type": "string"
+		},
+		{
+			"key": "Topic",
+			"value": ""
 		}
 	]
 }
