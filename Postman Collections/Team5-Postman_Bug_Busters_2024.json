@@ -3170,7 +3170,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "ac19aa8c-6953-431d-b420-2c530f5f8db2",
+				"id": "75cd9046-c9d4-4980-ad74-91be84315a13",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -3202,10 +3202,6 @@
 					"    pm.execution.setNextRequest(pm.info.requestName)",
 					"}",
 					"",
-					"//  pm.variables.set('requestdata',requestdata);",
-					"// if(currentrequest.data.length > 0){",
-					"//     postman.setNextRequest(pm.info.requestName)",
-					"// }",
 					"",
 					"//------------------ Authorization Set Up-----------------",
 					"pm.request.headers.clear(); // Clear all headers to prevent residual values",
@@ -3240,7 +3236,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "447e904a-8b43-4f19-a9f2-c6f9adc6fcac",
+				"id": "b3937e44-5f72-400b-bb81-95d14646fa45",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
